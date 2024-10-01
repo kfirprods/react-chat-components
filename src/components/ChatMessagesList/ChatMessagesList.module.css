@@ -1,0 +1,24 @@
+.chat-messages-list::-webkit-scrollbar {
+  width: 5px;
+}
+
+/* Track */
+.chat-messages-list::-webkit-scrollbar-track {
+  border-radius: 5px;
+}
+
+/* Handle */
+.chat-messages-list::-webkit-scrollbar-thumb {
+  background: #aaa;
+  border-radius: 5px;
+}
+
+/* Handle on hover */
+.chat-messages-list::-webkit-scrollbar-thumb:hover {
+  background: #888;
+}
+
+/* Handle on active */
+.chat-messages-list::-webkit-scrollbar-thumb:active {
+  background: #666;
+}
