@@ -67,11 +67,11 @@ const ChatInput: React.FC<ChatInputProps> = ({
   }
 
   return (
-    <div className="bg-zinc-700 flex flex-row place-items-center px-2 py-1 gap-2 border-t border-zinc-600">
+    <div className="bg-zinc-800 flex flex-row place-items-center px-2 py-1 gap-2 border-t border-zinc-700">
       {leftSlot}
 
       <input
-        className="bg-zinc-500 text-slate-50 flex-1 rounded-2xl px-3 py-1"
+        className="bg-zinc-600 text-slate-50 flex-1 rounded-2xl px-3 py-1 focus:outline-none text-sm"
         type="text"
         placeholder={placeholder}
         value={text}

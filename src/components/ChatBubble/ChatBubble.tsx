@@ -2,6 +2,7 @@ import clsx from "clsx";
 import { ChatMessageStatus } from "../../types";
 import MessageStatusIcon from "../MessageStatusIcon/MessageStatusIcon";
 import styles from "./ChatBubble.module.css";
+import { memo } from "react";
 
 export type ChatBubbleProps = {
   timestamp: string;
@@ -38,4 +39,4 @@ const ChatBubble: React.FC<React.PropsWithChildren<ChatBubbleProps>> = ({
   );
 };
 
-export default ChatBubble;
+export default memo(ChatBubble);

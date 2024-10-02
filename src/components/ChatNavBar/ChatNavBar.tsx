@@ -45,7 +45,7 @@ const ChatNavBar: React.FC<ChatNavBarProps> = ({
   return (
     <div
       className={clsx(
-        "bg-zinc-700 flex flex-row gap-3 place-items-center py-2 border-b border-zinc-600 select-none",
+        "bg-zinc-800 flex flex-row gap-3 place-items-center py-2 border-b border-zinc-700 select-none",
         {
           "px-2": !!hideBackButton,
         }

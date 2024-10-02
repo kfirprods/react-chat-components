@@ -1,21 +1,33 @@
 import clsx from "clsx";
 import styles from "./ChatMessagesList.module.css";
-import { forwardRef, useImperativeHandle, useRef } from "react";
+import {
+  forwardRef,
+  memo,
+  useEffect,
+  useImperativeHandle,
+  useRef,
+  useState,
+} from "react";
 import ChatBubble from "../ChatBubble/ChatBubble";
 import { ChatMessage } from "../../types";
 
 export type ChatMessagesListProps = {
   messages: ChatMessage[];
+  onScrolledUpChange?: (isScrolledUp: boolean) => void;
+  scrolledUpThreshold?: number;
 };
 
 export type ChatMessagesListHandle = {
   scrollToBottom: (smooth?: boolean) => void;
 };
 
+const DEFAULT_SCROLLED_UP_THRESHOLD = 100;
+
 const ChatMessagesList: React.ForwardRefRenderFunction<
   ChatMessagesListHandle,
   ChatMessagesListProps
-> = ({ messages }, ref) => {
+> = ({ messages, onScrolledUpChange, scrolledUpThreshold }, ref) => {
+  const [isScrolledUp, setIsScrolledUp] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
 
   useImperativeHandle(ref, () => ({
@@ -29,13 +41,31 @@ const ChatMessagesList: React.ForwardRefRenderFunction<
     },
   }));
 
+  useEffect(() => {
+    onScrolledUpChange?.(isScrolledUp);
+  }, [isScrolledUp, onScrolledUpChange]);
+
+  function handleScroll() {
+    if (containerRef.current) {
+      const { scrollTop, scrollHeight, clientHeight } = containerRef.current;
+
+      setIsScrolledUp(
+        scrollTop <
+          scrollHeight -
+            clientHeight -
+            (scrolledUpThreshold || DEFAULT_SCROLLED_UP_THRESHOLD)
+      );
+    }
+  }
+
   return (
     <div
       ref={containerRef}
       className={clsx(
-        "flex-1 flex flex-col gap-1 px-1 py-2 overflow-auto text-slate-200 font-normal",
+        "h-full flex-1 flex flex-col gap-1 px-1 py-2 overflow-auto text-slate-200 font-normal",
         styles["chat-messages-list"]
       )}
+      onScroll={handleScroll}
     >
       {messages.map((message) =>
         message.customRender ? (
@@ -55,4 +85,4 @@ const ChatMessagesList: React.ForwardRefRenderFunction<
   );
 };
 
-export default forwardRef(ChatMessagesList);
+export default memo(forwardRef(ChatMessagesList));
