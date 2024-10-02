@@ -2,10 +2,10 @@ import clsx from "clsx";
 import styles from "./ChatMessagesList.module.css";
 import { forwardRef, useImperativeHandle, useRef } from "react";
 import ChatBubble from "../ChatBubble/ChatBubble";
-import { ChatMessageStatus } from "../../types";
+import { ChatMessage } from "../../types";
 
 export type ChatMessagesListProps = {
-  messages: string[];
+  messages: ChatMessage[];
 };
 
 export type ChatMessagesListHandle = {
@@ -37,16 +37,20 @@ const ChatMessagesList: React.ForwardRefRenderFunction<
         styles["chat-messages-list"]
       )}
     >
-      {messages.map((message, index) => (
-        <ChatBubble
-          key={index}
-          timestamp={"now"}
-          status={ChatMessageStatus.SENT}
-          align={"right"}
-        >
-          {message}
-        </ChatBubble>
-      ))}
+      {messages.map((message) =>
+        message.customRender ? (
+          <div key={message.id}>{message.customRender}</div>
+        ) : (
+          <ChatBubble
+            key={message.id}
+            timestamp={"now"}
+            status={message.status}
+            align={"right"}
+          >
+            <p>{message.textualContent}</p>
+          </ChatBubble>
+        )
+      )}
     </div>
   );
 };

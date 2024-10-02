@@ -6,8 +6,29 @@ export default function MessageStatusIcon({
 }: {
   status: ChatMessageStatus;
 }) {
+  const shouldRenderTick =
+    status !== ChatMessageStatus.SENDING && status !== ChatMessageStatus.FAILED;
   const shouldDoubleTick =
-    status === ChatMessageStatus.RECEIVED || status === ChatMessageStatus.SEEN;
+    shouldRenderTick &&
+    (status === ChatMessageStatus.RECEIVED ||
+      status === ChatMessageStatus.SEEN);
+
+  const clockIcon = (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      fill="none"
+      viewBox="0 0 24 24"
+      strokeWidth={1.5}
+      stroke="currentColor"
+      className="size-6"
+    >
+      <path
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
+      />
+    </svg>
+  );
 
   return (
     <svg
@@ -20,12 +41,16 @@ export default function MessageStatusIcon({
         "text-blue-500": status === ChatMessageStatus.SEEN,
       })}
     >
-      <path
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        strokeWidth={3}
-        d="m4.5 12.75 6 6 9-13.5"
-      />
+      {status === ChatMessageStatus.SENDING && clockIcon}
+
+      {shouldRenderTick && (
+        <path
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth={3}
+          d="m4.5 12.75 6 6 9-13.5"
+        />
+      )}
 
       {shouldDoubleTick && (
         <path

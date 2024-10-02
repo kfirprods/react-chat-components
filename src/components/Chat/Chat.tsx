@@ -1,12 +1,16 @@
+import { v4 as uuidv4 } from "uuid";
 import ChatNavBar from "../ChatNavBar/ChatNavBar";
 import ChatMessagesList, {
   ChatMessagesListHandle,
 } from "../ChatMessagesList/ChatMessagesList";
 import ChatInput from "../ChatInput/ChatInput";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
+import { ChatMessage, ChatMessageStatus } from "../../types";
 
 export type ChatProps = {
   chatTitle: string;
+  messages: ChatMessage[];
+  onSend: (message: ChatMessage) => void;
   chatSubtitle?: string;
   profilePhotoUrl?: string;
   disableChatInput?: boolean;
@@ -17,9 +21,10 @@ const Chat: React.FC<ChatProps> = ({
   chatSubtitle,
   profilePhotoUrl,
   disableChatInput,
+  messages,
+  onSend,
 }) => {
   const chatMessagesListRef = useRef<ChatMessagesListHandle>(null);
-  const [messages, setMessages] = useState<string[]>([]);
 
   const addAttachmentButton = (
     <button className="h-8 text-slate-200">
@@ -46,7 +51,13 @@ const Chat: React.FC<ChatProps> = ({
   }, [messages]);
 
   function handleSend(text: string) {
-    setMessages((prevMessages) => [...prevMessages, text]);
+    onSend({
+      id: uuidv4(),
+      textualContent: text,
+      timestamp: "TDA",
+      alignment: "right",
+      status: ChatMessageStatus.SENDING,
+    });
   }
 
   return (
