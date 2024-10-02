@@ -1,9 +1,12 @@
+import clsx from "clsx";
 import ProfilePicture from "../ProfilePicture/ProfilePicture";
 
 export type ChatNavBarProps = {
   title: string;
   subtitle?: string;
   profilePhotoUrl?: string;
+  hideBackButton?: boolean;
+  backButtonUnreadCount?: number;
 
   rightSlot?: React.ReactNode;
 };
@@ -12,6 +15,8 @@ const ChatNavBar: React.FC<ChatNavBarProps> = ({
   title,
   subtitle,
   profilePhotoUrl,
+  hideBackButton,
+  backButtonUnreadCount,
   rightSlot,
 }) => {
   const chevronLeft = (
@@ -31,11 +36,30 @@ const ChatNavBar: React.FC<ChatNavBarProps> = ({
     </svg>
   );
 
+  const backButtonUnreadCountText = backButtonUnreadCount
+    ? backButtonUnreadCount > 99
+      ? "99+"
+      : backButtonUnreadCount
+    : "";
+
   return (
-    <div className="bg-zinc-700 flex flex-row gap-2 place-items-center py-2 border-b border-zinc-600 select-none">
-      <button className="flex-none text-slate-100 w-7 h-7">
-        {chevronLeft}
-      </button>
+    <div
+      className={clsx(
+        "bg-zinc-700 flex flex-row gap-3 place-items-center py-2 border-b border-zinc-600 select-none",
+        {
+          "px-2": !!hideBackButton,
+        }
+      )}
+    >
+      {!hideBackButton && (
+        <button className="flex-none text-slate-100 min-w-7 h-7 flex flex-row place-items-center">
+          {chevronLeft}
+
+          {backButtonUnreadCountText && (
+            <span className="mr-2">{backButtonUnreadCountText}</span>
+          )}
+        </button>
+      )}
 
       <div className="flex flex-row flex-1 gap-2">
         <ProfilePicture profilePhotoUrl={profilePhotoUrl} />

@@ -39,6 +39,25 @@ export const Basic: Story = {
   },
 };
 
+export const WithoutBackButton: Story = {
+  args: {
+    hideBackButton: true,
+    title: "John Doe",
+    subtitle: "Active now",
+    profilePhotoUrl: "https://randomuser.me/api/portraits/men/94.jpg",
+  },
+};
+
+export const UnreadCount: Story = {
+  args: {
+    hideBackButton: false,
+    backButtonUnreadCount: 1,
+    title: "John Doe",
+    subtitle: "Active now",
+    profilePhotoUrl: "https://randomuser.me/api/portraits/men/94.jpg",
+  },
+};
+
 export const RenderButtonsViaSlot: Story = {
   args: {
     title: "John Doe",
