@@ -19,7 +19,7 @@ const ChatPreview: React.FC<ChatPreviewProps> = ({
 }) => {
   return (
     <div className="flex flex-row gap-3 text-sm text-slate-200 select-none">
-      <ProfilePicture profilePhotoUrl={profilePhotoUrl} />
+      <ProfilePicture profilePhotoUrl={profilePhotoUrl} size="xl" />
 
       <div className="flex-1">
         <h3 className="font-semibold line-clamp-1">{name}</h3>

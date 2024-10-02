@@ -17,7 +17,7 @@ const meta = {
   tags: ["autodocs"],
   // More on argTypes: https://storybook.js.org/docs/api/argtypes
   argTypes: {
-    name: { control: "text" },
+    chatTitle: { control: "text" },
   },
 } satisfies Meta<typeof Chat>;
 
@@ -26,5 +26,9 @@ type Story = StoryObj<typeof meta>;
 
 // More on writing stories with args: https://storybook.js.org/docs/writing-stories/args
 export const Basic: Story = {
-  args: {},
+  args: {
+    chatTitle: "John Doe",
+    chatSubtitle: "Active now",
+    profilePhotoUrl: "https://randomuser.me/api/portraits/men/94.jpg",
+  },
 };

@@ -8,6 +8,7 @@ export type ChatInputProps = {
   defaultValue?: string;
   leftSlot?: React.ReactNode;
   rightSlot?: React.ReactNode;
+  disabled?: boolean;
 };
 
 const ChatInput: React.FC<ChatInputProps> = ({
@@ -16,13 +17,14 @@ const ChatInput: React.FC<ChatInputProps> = ({
   defaultValue,
   leftSlot,
   rightSlot,
+  disabled,
 }) => {
   const [text, setText] = React.useState(defaultValue || "");
 
   const sendButton = (
     <button
       onClick={send}
-      disabled={text.length === 0}
+      disabled={text.length === 0 || disabled}
       className={clsx(
         "h-8 rounded-full aspect-square w-8 flex place-items-center place-content-center p-2",
         {
@@ -65,7 +67,7 @@ const ChatInput: React.FC<ChatInputProps> = ({
   }
 
   return (
-    <div className="bg-zinc-700 flex flex-row place-items-center px-2 py-1 gap-2 border-y border-zinc-600">
+    <div className="bg-zinc-700 flex flex-row place-items-center px-2 py-1 gap-2 border-t border-zinc-600">
       {leftSlot}
 
       <input
@@ -73,6 +75,7 @@ const ChatInput: React.FC<ChatInputProps> = ({
         type="text"
         placeholder={placeholder}
         value={text}
+        disabled={disabled}
         onChange={(e) => setText(e.target.value)}
         onKeyDown={handleKeyDown}
       />

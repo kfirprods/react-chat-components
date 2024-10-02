@@ -33,7 +33,7 @@ const ChatMessagesList: React.ForwardRefRenderFunction<
     <div
       ref={containerRef}
       className={clsx(
-        "flex-1 flex flex-col gap-2 px-1 py-2 overflow-auto text-slate-200 font-normal",
+        "flex-1 flex flex-col gap-1 px-1 py-2 overflow-auto text-slate-200 font-normal",
         styles["chat-messages-list"]
       )}
     >
@@ -42,6 +42,7 @@ const ChatMessagesList: React.ForwardRefRenderFunction<
           key={index}
           timestamp={"now"}
           status={ChatMessageStatus.SENT}
+          align={"right"}
         >
           {message}
         </ChatBubble>

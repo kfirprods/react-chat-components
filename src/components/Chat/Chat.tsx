@@ -5,9 +5,19 @@ import ChatMessagesList, {
 import ChatInput from "../ChatInput/ChatInput";
 import { useEffect, useRef, useState } from "react";
 
-export type ChatProps = {};
+export type ChatProps = {
+  chatTitle: string;
+  chatSubtitle?: string;
+  profilePhotoUrl?: string;
+  disableChatInput?: boolean;
+};
 
-const Chat: React.FC<ChatProps> = ({}) => {
+const Chat: React.FC<ChatProps> = ({
+  chatTitle,
+  chatSubtitle,
+  profilePhotoUrl,
+  disableChatInput,
+}) => {
   const chatMessagesListRef = useRef<ChatMessagesListHandle>(null);
   const [messages, setMessages] = useState<string[]>([]);
 
@@ -41,11 +51,19 @@ const Chat: React.FC<ChatProps> = ({}) => {
 
   return (
     <div className="flex flex-col h-full">
-      <ChatNavBar />
+      <ChatNavBar
+        title={chatTitle}
+        subtitle={chatSubtitle}
+        profilePhotoUrl={profilePhotoUrl}
+      />
 
       <ChatMessagesList ref={chatMessagesListRef} messages={messages} />
 
-      <ChatInput onSend={handleSend} leftSlot={addAttachmentButton} />
+      <ChatInput
+        onSend={handleSend}
+        leftSlot={addAttachmentButton}
+        disabled={disableChatInput}
+      />
     </div>
   );
 };
