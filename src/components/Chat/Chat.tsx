@@ -14,6 +14,7 @@ export type ChatProps = {
   chatSubtitle?: string;
   profilePhotoUrl?: string;
   disableChatInput?: boolean;
+  hideChatInput?: boolean;
 };
 
 const Chat: React.FC<ChatProps> = ({
@@ -21,6 +22,7 @@ const Chat: React.FC<ChatProps> = ({
   chatSubtitle,
   profilePhotoUrl,
   disableChatInput,
+  hideChatInput,
   messages,
   onSend,
 }) => {
@@ -59,7 +61,6 @@ const Chat: React.FC<ChatProps> = ({
     onSend({
       id: uuidv4(),
       textualContent: text,
-      timestamp: "TDA",
       alignment: "right",
       status: ChatMessageStatus.SENDING,
     });
@@ -104,22 +105,22 @@ const Chat: React.FC<ChatProps> = ({
         />
 
         {isScrolledUp && (
-          <div className="absolute bottom-4 right-0 bg-zinc-800 rounded-l-lg w-11 h-8 flex place-items-center place-content-center">
-            <button
-              className="w-5 h-5 rounded-full text-slate-200 flex place-items-center place-content-center"
-              onClick={() => chatMessagesListRef.current?.scrollToBottom(true)}
-            >
-              {chevronDownIcon}
-            </button>
-          </div>
+          <button
+            className="absolute bottom-4 right-0 bg-zinc-800 rounded-l-lg w-11 h-8 flex place-items-center place-content-center"
+            onClick={() => chatMessagesListRef.current?.scrollToBottom(true)}
+          >
+            <div className="w-5 h-5">{chevronDownIcon}</div>
+          </button>
         )}
       </div>
 
-      <ChatInput
-        onSend={handleSend}
-        leftSlot={addAttachmentButton}
-        disabled={disableChatInput}
-      />
+      {!hideChatInput && (
+        <ChatInput
+          onSend={handleSend}
+          leftSlot={addAttachmentButton}
+          disabled={disableChatInput}
+        />
+      )}
     </div>
   );
 };

@@ -31,7 +31,19 @@ export const Basic: Story = {
     const [messages, setMessages] = useState<ChatMessage[]>(args.messages);
 
     const handleSend = (message: ChatMessage) => {
-      setMessages((prevMessages) => [...prevMessages, message]);
+      setMessages((prevMessages) => {
+        if (
+          prevMessages[prevMessages.length - 1].alignment === message.alignment
+        ) {
+          prevMessages[prevMessages.length - 1].isLastInGroup = false;
+        }
+        message.isLastInGroup = true;
+        message.timestamp = new Date().toLocaleTimeString(undefined, {
+          hour: "2-digit",
+          minute: "2-digit",
+        });
+        return [...prevMessages, message];
+      });
 
       // Simulate message transition from sending to sent
       // TODO: randomly simulate a failure
@@ -57,25 +69,89 @@ export const Basic: Story = {
       }, 500);
     };
 
-    return <Chat {...args} messages={messages} onSend={handleSend} />;
+    return (
+      <div style={{ height: "100%", background: "#1F1F1F" }}>
+        <Chat {...args} messages={messages} onSend={handleSend} />
+      </div>
+    );
   },
 
   args: {
-    chatTitle: "John Doe",
+    chatTitle: "Jerry Doe",
     chatSubtitle: "Active now",
     profilePhotoUrl: "https://randomuser.me/api/portraits/men/94.jpg",
     messages: [
       {
         id: "initial",
         customRender: (
-          <p className="text-center">
+          <p className="text-center mb-3">
             <span className="inline-flex items-center rounded-md bg-green-50 px-2 py-1 text-xs font-medium text-green-700 ring-1 ring-inset ring-green-600/20">
               CONVERSATION STARTED
             </span>
           </p>
         ),
       },
+      {
+        id: "greeting",
+        textualContent: "Dear John, please Johnny please come home...",
+        timestamp: new Date().toLocaleTimeString(undefined, {
+          hour: "2-digit",
+          minute: "2-digit",
+        }),
+        alignment: "left",
+        isLastInGroup: true,
+      },
     ],
     onSend: () => {},
+  },
+};
+
+export const NoInput: Story = {
+  render: (args) => {
+    return (
+      <div className="h-full flex flex-col" style={{ background: "#1F1F1F" }}>
+        <Chat {...args} />
+
+        <div className="text-xs bg-zinc-600 text-zinc-200 px-5 py-2 text-center">
+          You can't send messages in this chat because you blocked this contact
+        </div>
+      </div>
+    );
+  },
+
+  args: {
+    hideChatInput: true,
+    chatTitle: "Johnny Walker's Wife",
+    chatSubtitle: "Last seen yesterday",
+    onSend: () => {},
+    messages: [
+      {
+        id: "initial",
+        customRender: (
+          <p className="text-center mb-3">
+            <span className="inline-flex items-center rounded-md bg-zinc-800 px-2 py-1 text-xs font-medium text-slate-200 ring-1 ring-inset ring-zinc-600/40">
+              Yesterday
+            </span>
+          </p>
+        ),
+      },
+      {
+        id: "greeting",
+        textualContent: "Dear John, please Johnny please come home...",
+        timestamp: "10:00 AM",
+        alignment: "left",
+        isLastInGroup: true,
+      },
+      {
+        id: "initial",
+        customRender: (
+          <p className="text-center mb-3">
+            <span className="inline-flex items-center rounded-md bg-red-800 px-2 py-1 text-xs font-medium text-slate-200 ring-1 ring-inset ring-red-600/50">
+              You have blocked this contact
+            </span>
+          </p>
+        ),
+      },
+    ],
   },
 };

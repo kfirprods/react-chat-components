@@ -5,9 +5,10 @@ import styles from "./ChatBubble.module.css";
 import { memo } from "react";
 
 export type ChatBubbleProps = {
-  timestamp: string;
+  timestamp?: string;
   status?: ChatMessageStatus;
   align?: "left" | "right" | "stretch";
+  isLastInGroupedMessages?: boolean;
 };
 
 const ChatBubble: React.FC<React.PropsWithChildren<ChatBubbleProps>> = ({
@@ -15,6 +16,7 @@ const ChatBubble: React.FC<React.PropsWithChildren<ChatBubbleProps>> = ({
   timestamp,
   align,
   status,
+  isLastInGroupedMessages,
 }) => {
   align = align || "stretch";
 
@@ -22,16 +24,19 @@ const ChatBubble: React.FC<React.PropsWithChildren<ChatBubbleProps>> = ({
     <div
       className={clsx(
         styles["chat-bubble"],
-        "rounded-lg bg-zinc-700 p-2 flex flex-row place-content-between gap-2",
+        "rounded-xl px-2 py-1.5 flex flex-row place-content-between gap-2",
         {
           "self-start": align === "left",
           "self-end": align === "right",
+          "mb-2": !!isLastInGroupedMessages,
+          "bg-zinc-700": align === "left",
+          "bg-emerald-800": align === "right",
         }
       )}
     >
       {children}
 
-      <div className="inline-flex justify-end place-items-end text-gray-400 text-xs select-none gap-1">
+      <div className="flex-none inline-flex justify-end place-items-end text-gray-400 text-xs select-none gap-1">
         <span>{timestamp}</span>
         {status && <MessageStatusIcon status={status} />}
       </div>

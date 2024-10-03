@@ -8,4 +8,5 @@ export type ChatMessage = {
   textualContent?: string;
   alignment?: "left" | "right" | "stretch";
   customRender?: React.ReactNode;
+  isLastInGroup?: boolean;
 };

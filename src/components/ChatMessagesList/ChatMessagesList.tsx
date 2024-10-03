@@ -73,9 +73,10 @@ const ChatMessagesList: React.ForwardRefRenderFunction<
         ) : (
           <ChatBubble
             key={message.id}
-            timestamp={"now"}
+            timestamp={message.timestamp}
             status={message.status}
-            align={"right"}
+            align={message.alignment}
+            isLastInGroupedMessages={message.isLastInGroup}
           >
             <p>{message.textualContent}</p>
           </ChatBubble>
