@@ -15,7 +15,7 @@ const meta = {
 
     docs: {
       description: {
-        component: `A navigation header bar for chat components.`,
+        component: `A basic text input component paired with a "Send" button. Additional functionality can be injected via left and right slots.`,
       },
     },
   },
@@ -48,5 +48,27 @@ export const Placeholder: Story = {
   args: {
     onSend: () => {},
     placeholder: "Type a message...",
+  },
+};
+
+export const LeftSlot: Story = {
+  args: {
+    onSend: () => {},
+    leftSlot: (
+      <button className="text-white" title="Emojis">
+        😀
+      </button>
+    ),
+  },
+};
+
+export const RightSlot: Story = {
+  args: {
+    onSend: () => {},
+    rightSlot: (
+      <button title="Camera" style={{ transform: "translateY(-5px)" }}>
+        📷
+      </button>
+    ),
   },
 };

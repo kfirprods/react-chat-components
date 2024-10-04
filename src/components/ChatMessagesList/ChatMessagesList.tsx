@@ -9,12 +9,18 @@ import {
   useState,
 } from "react";
 import ChatBubble from "../ChatBubble/ChatBubble";
-import { ChatMessage } from "../../types";
+import { ChatMessage, MessageAttachment } from "../../types";
+import MessageContent from "../MessageContent/MessageContent";
 
 export type ChatMessagesListProps = {
   messages: ChatMessage[];
-  onScrolledUpChange?: (isScrolledUp: boolean) => void;
   scrolledUpThreshold?: number;
+
+  onScrolledUpChange?: (isScrolledUp: boolean) => void;
+  onAttachmentClick?: (
+    attachment: MessageAttachment,
+    message: ChatMessage
+  ) => void;
 };
 
 export type ChatMessagesListHandle = {
@@ -26,7 +32,10 @@ const DEFAULT_SCROLLED_UP_THRESHOLD = 100;
 const ChatMessagesList: React.ForwardRefRenderFunction<
   ChatMessagesListHandle,
   ChatMessagesListProps
-> = ({ messages, onScrolledUpChange, scrolledUpThreshold }, ref) => {
+> = (
+  { messages, scrolledUpThreshold, onScrolledUpChange, onAttachmentClick },
+  ref
+) => {
   const [isScrolledUp, setIsScrolledUp] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
 
@@ -62,7 +71,7 @@ const ChatMessagesList: React.ForwardRefRenderFunction<
     <div
       ref={containerRef}
       className={clsx(
-        "h-full flex-1 flex flex-col gap-1 px-1 py-2 overflow-auto text-slate-200 font-normal",
+        "h-full flex-1 flex flex-col gap-1 px-2.5 py-2 overflow-auto text-slate-200 font-normal",
         styles["chat-messages-list"]
       )}
       onScroll={handleScroll}
@@ -78,7 +87,12 @@ const ChatMessagesList: React.ForwardRefRenderFunction<
             align={message.alignment}
             isLastInGroupedMessages={message.isLastInGroup}
           >
-            <p>{message.textualContent}</p>
+            <MessageContent
+              message={message}
+              onAttachmentClick={(attachment, message) =>
+                onAttachmentClick?.(attachment, message)
+              }
+            />
           </ChatBubble>
         )
       )}

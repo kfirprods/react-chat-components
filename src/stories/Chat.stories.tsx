@@ -101,6 +101,22 @@ export const Basic: Story = {
         alignment: "left",
         isLastInGroup: true,
       },
+      {
+        id: "image-attachment",
+        textualContent: "The letter",
+        timestamp: new Date().toLocaleTimeString(undefined, {
+          hour: "2-digit",
+          minute: "2-digit",
+        }),
+        alignment: "left",
+        attachments: [
+          {
+            id: "asdf",
+            type: "image",
+            url: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQCCEqzBcxYVecAOhdC7nmyBTzVcBCbxrLpog&s",
+          },
+        ],
+      },
     ],
     onSend: () => {},
   },
@@ -112,7 +128,7 @@ export const NoInput: Story = {
       <div className="h-full flex flex-col" style={{ background: "#1F1F1F" }}>
         <Chat {...args} />
 
-        <div className="text-xs bg-zinc-600 text-zinc-200 px-5 py-2 text-center">
+        <div className="text-xs font-semibold bg-zinc-600 text-zinc-200 px-5 py-2 text-center">
           You can't send messages in this chat because you blocked this contact
         </div>
       </div>

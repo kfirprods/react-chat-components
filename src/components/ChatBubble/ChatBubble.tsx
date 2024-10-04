@@ -24,7 +24,7 @@ const ChatBubble: React.FC<React.PropsWithChildren<ChatBubbleProps>> = ({
     <div
       className={clsx(
         styles["chat-bubble"],
-        "rounded-xl px-2 py-1.5 flex flex-row place-content-between gap-2",
+        "relative rounded-xl px-2.5 py-1.5 flex flex-row place-content-between gap-2",
         {
           "self-start": align === "left",
           "self-end": align === "right",
@@ -36,7 +36,7 @@ const ChatBubble: React.FC<React.PropsWithChildren<ChatBubbleProps>> = ({
     >
       {children}
 
-      <div className="flex-none inline-flex justify-end place-items-end text-gray-400 text-xs select-none gap-1">
+      <div className="absolute bottom-1 right-2 inline-flex justify-end place-items-end text-gray-400 text-xs select-none gap-1">
         <span>{timestamp}</span>
         {status && <MessageStatusIcon status={status} />}
       </div>

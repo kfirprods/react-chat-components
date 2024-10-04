@@ -5,7 +5,7 @@ import ChatMessagesList, {
 } from "../ChatMessagesList/ChatMessagesList";
 import ChatInput from "../ChatInput/ChatInput";
 import { useCallback, useEffect, useRef, useState } from "react";
-import { ChatMessage, ChatMessageStatus } from "../../types";
+import { ChatMessage, ChatMessageStatus, MessageAttachment } from "../../types";
 
 export type ChatProps = {
   chatTitle: string;
@@ -89,6 +89,14 @@ const Chat: React.FC<ChatProps> = ({
     </svg>
   );
 
+  const handleAttachmentClicked = useCallback(
+    (attachment: MessageAttachment, message: ChatMessage) => {
+      // TODO: show "attachments viewer" component with all message attachments and auto scroll to the clicked attachment
+      // setViewedAttachments(() => [...message.attachments]);
+    },
+    []
+  );
+
   return (
     <div className="flex flex-col h-full">
       <ChatNavBar
@@ -102,6 +110,7 @@ const Chat: React.FC<ChatProps> = ({
           ref={chatMessagesListRef}
           messages={messages}
           onScrolledUpChange={handleScrolledUpChange}
+          onAttachmentClick={handleAttachmentClicked}
         />
 
         {isScrolledUp && (

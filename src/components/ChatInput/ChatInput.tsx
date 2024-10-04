@@ -23,6 +23,7 @@ const ChatInput: React.FC<ChatInputProps> = ({
 
   const sendButton = (
     <button
+      title="Send"
       onClick={send}
       disabled={text.length === 0 || disabled}
       className={clsx(
@@ -67,7 +68,7 @@ const ChatInput: React.FC<ChatInputProps> = ({
   }
 
   return (
-    <div className="bg-zinc-800 flex flex-row place-items-center px-2 py-1 gap-2 border-t border-zinc-700">
+    <div className="bg-zinc-800 flex flex-row place-items-center px-2 py-1 gap-2 border-t border-zinc-700 min-h-11">
       {leftSlot}
 
       <input
@@ -80,7 +81,7 @@ const ChatInput: React.FC<ChatInputProps> = ({
         onKeyDown={handleKeyDown}
       />
 
-      {rightSlot || sendButton}
+      {(!text && rightSlot) || sendButton}
     </div>
   );
 };
