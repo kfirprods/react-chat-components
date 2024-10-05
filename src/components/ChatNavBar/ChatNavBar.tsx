@@ -7,6 +7,7 @@ export type ChatNavBarProps = {
   profilePhotoUrl?: string;
   hideBackButton?: boolean;
   backButtonUnreadCount?: number;
+  onClick?: () => void;
 
   rightSlot?: React.ReactNode;
 };
@@ -17,6 +18,7 @@ const ChatNavBar: React.FC<ChatNavBarProps> = ({
   profilePhotoUrl,
   hideBackButton,
   backButtonUnreadCount,
+  onClick,
   rightSlot,
 }) => {
   const chevronLeft = (
@@ -48,8 +50,10 @@ const ChatNavBar: React.FC<ChatNavBarProps> = ({
         "bg-zinc-800 flex flex-row gap-3 place-items-center py-2 border-b border-zinc-700 select-none",
         {
           "px-2": !!hideBackButton,
+          "cursor-pointer": !!onClick,
         }
       )}
+      onClick={onClick}
     >
       {!hideBackButton && (
         <button className="flex-none text-slate-100 min-w-7 h-7 flex flex-row place-items-center">
@@ -64,9 +68,13 @@ const ChatNavBar: React.FC<ChatNavBarProps> = ({
       <div className="flex flex-row flex-1 gap-2">
         <ProfilePicture profilePhotoUrl={profilePhotoUrl} />
 
-        <div className="flex flex-col">
-          <div className="text-slate-100 text-sm font-semibold">{title}</div>
-          {subtitle && <div className="text-slate-200 text-xs">{subtitle}</div>}
+        <div className="flex flex-col place-content-center">
+          <p className="text-slate-100 text-sm font-semibold line-clamp-1">
+            {title}
+          </p>
+          {subtitle && (
+            <p className="text-slate-200 text-xs line-clamp-1">{subtitle}</p>
+          )}
         </div>
       </div>
 

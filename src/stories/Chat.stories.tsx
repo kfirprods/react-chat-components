@@ -114,6 +114,7 @@ export const Basic: Story = {
             id: "asdf",
             type: "image",
             url: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQCCEqzBcxYVecAOhdC7nmyBTzVcBCbxrLpog&s",
+            title: "Jerry Doe",
           },
         ],
       },

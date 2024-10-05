@@ -48,6 +48,12 @@ export const WithoutBackButton: Story = {
   },
 };
 
+export const WithoutSubtitle: Story = {
+  args: {
+    title: "John Doe",
+  },
+};
+
 export const UnreadCount: Story = {
   args: {
     hideBackButton: false,
@@ -81,5 +87,23 @@ export const RenderButtonsViaSlot: Story = {
         </svg>
       </button>
     ),
+  },
+};
+
+export const LongTexts: Story = {
+  args: {
+    title:
+      "A very very long group name that probably exceeds the width of the screen",
+    subtitle:
+      'Click here for more information about "A very very long group name that porbably exceeds the width of the screen"',
+    profilePhotoUrl: "https://randomuser.me/api/portraits/men/94.jpg",
+  },
+};
+
+export const Clickable: Story = {
+  args: {
+    title: "John Doe",
+    subtitle: "Click for more info",
+    onClick: () => alert("Clicked!"),
   },
 };

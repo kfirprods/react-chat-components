@@ -6,6 +6,7 @@ import ChatMessagesList, {
 import ChatInput from "../ChatInput/ChatInput";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { ChatMessage, ChatMessageStatus, MessageAttachment } from "../../types";
+import { AttachmentViewer } from "../AttachmentViewer/AttachmentViewer";
 
 export type ChatProps = {
   chatTitle: string;
@@ -26,6 +27,10 @@ const Chat: React.FC<ChatProps> = ({
   messages,
   onSend,
 }) => {
+  const [currentOpenAttachment, setCurrentOpenAttachment] = useState<{
+    message: ChatMessage;
+    attachment: MessageAttachment;
+  } | null>(null);
   const [isScrolledUp, setIsScrolledUp] = useState(false);
   const chatMessagesListRef = useRef<ChatMessagesListHandle>(null);
   const lastKnownMessagesLength = useRef(messages.length);
@@ -91,14 +96,24 @@ const Chat: React.FC<ChatProps> = ({
 
   const handleAttachmentClicked = useCallback(
     (attachment: MessageAttachment, message: ChatMessage) => {
-      // TODO: show "attachments viewer" component with all message attachments and auto scroll to the clicked attachment
-      // setViewedAttachments(() => [...message.attachments]);
+      setCurrentOpenAttachment({
+        attachment,
+        message,
+      });
     },
     []
   );
 
   return (
-    <div className="flex flex-col h-full">
+    <div className="flex flex-col h-full relative">
+      {currentOpenAttachment && (
+        <AttachmentViewer
+          current={currentOpenAttachment.attachment}
+          context={currentOpenAttachment.message}
+          onClose={() => setCurrentOpenAttachment(null)}
+        />
+      )}
+
       <ChatNavBar
         title={chatTitle}
         subtitle={chatSubtitle}
