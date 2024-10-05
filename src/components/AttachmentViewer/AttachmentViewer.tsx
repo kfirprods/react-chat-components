@@ -11,7 +11,7 @@ export type AttachmentViewerProps = {
   context?: ChatMessage;
 };
 
-export const AttachmentViewer: React.FC<AttachmentViewerProps> = ({
+const AttachmentViewer: React.FC<AttachmentViewerProps> = ({
   current,
   context,
   onClose,
@@ -116,3 +116,5 @@ export const AttachmentViewer: React.FC<AttachmentViewerProps> = ({
     </div>
   );
 };
+
+export default AttachmentViewer;

@@ -6,7 +6,7 @@ import ChatMessagesList, {
 import ChatInput from "../ChatInput/ChatInput";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { ChatMessage, ChatMessageStatus, MessageAttachment } from "../../types";
-import { AttachmentViewer } from "../AttachmentViewer/AttachmentViewer";
+import AttachmentViewer from "../AttachmentViewer/AttachmentViewer";
 
 export type ChatProps = {
   chatTitle: string;
