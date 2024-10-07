@@ -9,7 +9,7 @@ const MenuItem: React.FC<MenuItemProps> = ({ text, onClick, leftSlot }) => {
   return (
     <button
       onClick={onClick}
-      className="text-start hover:bg-zinc-800 px-2 py-1.5 rounded-lg"
+      className="flex flex-row gap-1.5 text-start hover:bg-zinc-800 px-2 py-1.5 rounded-lg"
     >
       {leftSlot}
 

@@ -11,9 +11,12 @@
   transform: scale(0.2);
 }
 
-.menu-exit-active,
 .menu-enter-active {
   transition: transform 200ms ease-in;
+}
+
+.menu-exit-active {
+  transition: transform 100ms linear;
 }
 
 .menu-exit,
