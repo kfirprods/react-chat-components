@@ -7,6 +7,10 @@ import ChatInput from "../ChatInput/ChatInput";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { ChatMessage, ChatMessageStatus, MessageAttachment } from "../../types";
 import AttachmentViewer from "../AttachmentViewer/AttachmentViewer";
+import clsx from "clsx";
+import styles from "./Chat.module.css";
+import { CSSTransition } from "react-transition-group";
+import MenuItem from "../MenuItem/MenuItem";
 
 export type ChatProps = {
   chatTitle: string;
@@ -31,28 +35,16 @@ const Chat: React.FC<ChatProps> = ({
     message: ChatMessage;
     attachment: MessageAttachment;
   } | null>(null);
+  const [isAttachmentsMenuOpen, setIsAttachmentsMenuOpen] = useState(false);
+  const menuRef = useRef<HTMLDivElement>(null);
+  const attachmentsButtonRef = useRef<HTMLButtonElement>(null);
   const [isScrolledUp, setIsScrolledUp] = useState(false);
   const chatMessagesListRef = useRef<ChatMessagesListHandle>(null);
   const lastKnownMessagesLength = useRef(messages.length);
 
-  const addAttachmentButton = (
-    <button className="h-8 text-slate-200">
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        fill="none"
-        viewBox="0 0 24 24"
-        strokeWidth={1.5}
-        stroke="currentColor"
-        className="size-6"
-      >
-        <path
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          d="M12 4.5v15m7.5-7.5h-15"
-        />
-      </svg>
-    </button>
-  );
+  const toggleAttachmentsMenu = useCallback(() => {
+    setIsAttachmentsMenuOpen((isOpen) => !isOpen);
+  }, []);
 
   useEffect(() => {
     if (!isScrolledUp && messages.length > lastKnownMessagesLength.current) {
@@ -61,6 +53,29 @@ const Chat: React.FC<ChatProps> = ({
 
     lastKnownMessagesLength.current = messages.length;
   }, [messages, isScrolledUp]);
+
+  const handleClickOutside = useCallback((event: MouseEvent) => {
+    if (
+      menuRef.current &&
+      !menuRef.current.contains(event.target as Node) &&
+      attachmentsButtonRef.current &&
+      !attachmentsButtonRef.current.contains(event.target as Node)
+    ) {
+      setIsAttachmentsMenuOpen(false);
+    }
+  }, []);
+
+  useEffect(() => {
+    if (isAttachmentsMenuOpen) {
+      document.addEventListener("mousedown", handleClickOutside);
+    } else {
+      document.removeEventListener("mousedown", handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [isAttachmentsMenuOpen, handleClickOutside]);
 
   function handleSend(text: string) {
     onSend({
@@ -74,6 +89,71 @@ const Chat: React.FC<ChatProps> = ({
   const handleScrolledUpChange = useCallback((isScrolledUp: boolean) => {
     setIsScrolledUp(isScrolledUp);
   }, []);
+
+  const handleAttachmentClicked = useCallback(
+    (attachment: MessageAttachment, message: ChatMessage) => {
+      setCurrentOpenAttachment({
+        attachment,
+        message,
+      });
+    },
+    []
+  );
+
+  const addAttachmentButton = (
+    <div className="relative">
+      <CSSTransition
+        in={isAttachmentsMenuOpen}
+        timeout={300}
+        unmountOnExit
+        classNames={{
+          enter: styles["menu-enter"],
+          enterActive: styles["menu-enter-active"],
+          exit: styles["menu-exit"],
+          exitActive: styles["menu-exit-active"],
+        }}
+      >
+        <div
+          ref={menuRef}
+          className={clsx(
+            "absolute max-w-80 px-2 py-3 bg-zinc-700 origin-bottom-left rounded-xl text-zinc-300 flex flex-col whitespace-nowrap",
+            styles["attachment-menu"]
+          )}
+        >
+          <MenuItem text="Documents" onClick={() => {}} />
+          <MenuItem text="Photos & Videos" onClick={() => {}} />
+        </div>
+      </CSSTransition>
+
+      <button
+        ref={attachmentsButtonRef}
+        onClick={toggleAttachmentsMenu}
+        className={clsx(
+          "flex place-items-center place-content-center w-7 h-7 text-slate-200 transition-all origin-center rounded-full",
+          {
+            "bg-zinc-400/60": isAttachmentsMenuOpen,
+          }
+        )}
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 26 24"
+          strokeWidth={2}
+          stroke="currentColor"
+          className={clsx("size-6 transition-all duration-300", {
+            [styles["rotated-x"]]: isAttachmentsMenuOpen,
+          })}
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            d="M12 4.5v15m7.5-7.5h-15"
+          />
+        </svg>
+      </button>
+    </div>
+  );
 
   const chevronDownIcon = (
     <svg
@@ -92,16 +172,6 @@ const Chat: React.FC<ChatProps> = ({
         strokeWidth={10}
       />
     </svg>
-  );
-
-  const handleAttachmentClicked = useCallback(
-    (attachment: MessageAttachment, message: ChatMessage) => {
-      setCurrentOpenAttachment({
-        attachment,
-        message,
-      });
-    },
-    []
   );
 
   return (

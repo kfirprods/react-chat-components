@@ -1,0 +1,26 @@
+.rotated-x {
+  transform: rotateZ(225deg) translateY(-1px) translateX(1px);
+}
+
+.attachment-menu {
+  position: absolute;
+  bottom: 110%;
+}
+
+.menu-enter {
+  transform: scale(0.2);
+}
+
+.menu-exit-active,
+.menu-enter-active {
+  transition: transform 200ms ease-in;
+}
+
+.menu-exit,
+.menu-enter-active {
+  transform: scale(1);
+}
+
+.menu-exit-active {
+  transform: scale(0.2);
+}
