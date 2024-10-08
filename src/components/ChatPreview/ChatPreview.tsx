@@ -18,14 +18,16 @@ const ChatPreview: React.FC<ChatPreviewProps> = ({
   timestamp,
 }) => {
   return (
-    <div className="flex flex-row gap-3 text-sm text-slate-200 select-none">
-      <ProfilePicture profilePhotoUrl={profilePhotoUrl} size="xl" />
+    <div className="flex flex-row gap-3 text-sm text-slate-200 select-none min-h-16">
+      <div className="self-center">
+        <ProfilePicture profilePhotoUrl={profilePhotoUrl} size="lg" />
+      </div>
 
       <div className="flex-1">
         <h3 className="text-start font-semibold line-clamp-1">{name}</h3>
-        <p className="text-start line-clamp-2 text-gray-400">
+        <p className="text-start line-clamp-2 text-gray-400 leading-4">
           {status && (
-            <span className="inline-flex mr-0.5 translate-y-0.5">
+            <span className="inline-flex mr-1 translate-y-0.5">
               <MessageStatusIcon status={status} />
             </span>
           )}
@@ -33,7 +35,11 @@ const ChatPreview: React.FC<ChatPreviewProps> = ({
         </p>
       </div>
 
-      {timestamp && <div className="text-gray-400 flex-none">{timestamp}</div>}
+      {timestamp && (
+        <div className="self-start text-xs text-gray-400 flex-none">
+          {timestamp}
+        </div>
+      )}
     </div>
   );
 };

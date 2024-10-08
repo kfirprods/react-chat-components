@@ -23,7 +23,7 @@ const ProfilePicture: React.FC<ProfilePictureProps> = ({
         "aspect-square",
         "bg-gray-200",
         {
-          "w-16 h-16": size === "xl",
+          "w-14 h-14": size === "xl",
           "w-12 h-12": size === "lg",
           "w-9 h-9": size === "md",
           "w-6 h-6": size === "sm",

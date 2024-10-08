@@ -1,10 +1,19 @@
+"use client";
+
 import { v4 as uuidv4 } from "uuid";
 import ChatNavBar from "../ChatNavBar/ChatNavBar";
 import ChatMessagesList, {
   ChatMessagesListHandle,
 } from "../ChatMessagesList/ChatMessagesList";
-import ChatInput from "../ChatInput/ChatInput";
-import { useCallback, useEffect, useRef, useState } from "react";
+import ChatInput, { ChatInputHandle } from "../ChatInput/ChatInput";
+import {
+  forwardRef,
+  useCallback,
+  useEffect,
+  useImperativeHandle,
+  useRef,
+  useState,
+} from "react";
 import { ChatMessage, ChatMessageStatus, MessageAttachment } from "../../types";
 import AttachmentViewer from "../AttachmentViewer/AttachmentViewer";
 import clsx from "clsx";
@@ -24,16 +33,24 @@ export type ChatProps = {
   hideChatInput?: boolean;
 };
 
-const Chat: React.FC<ChatProps> = ({
-  chatTitle,
-  chatSubtitle,
-  profilePhotoUrl,
-  disableChatInput,
-  hideChatInput,
-  messages,
-  onSend,
-  onClose,
-}) => {
+export type ChatHandle = {
+  scrollToBottom: (smooth?: boolean) => void;
+  focusChatInput: () => void;
+};
+
+const Chat: React.ForwardRefRenderFunction<ChatHandle, ChatProps> = (
+  {
+    chatTitle,
+    chatSubtitle,
+    profilePhotoUrl,
+    disableChatInput,
+    hideChatInput,
+    messages,
+    onSend,
+    onClose,
+  },
+  ref
+) => {
   const [currentOpenAttachment, setCurrentOpenAttachment] = useState<{
     message: ChatMessage;
     attachment: MessageAttachment;
@@ -43,6 +60,7 @@ const Chat: React.FC<ChatProps> = ({
   const attachmentsButtonRef = useRef<HTMLButtonElement>(null);
   const [isScrolledUp, setIsScrolledUp] = useState(false);
   const chatMessagesListRef = useRef<ChatMessagesListHandle>(null);
+  const chatInputRef = useRef<ChatInputHandle>(null);
   const lastKnownMessagesLength = useRef(messages.length);
 
   const toggleAttachmentsMenu = useCallback(() => {
@@ -50,7 +68,7 @@ const Chat: React.FC<ChatProps> = ({
   }, []);
 
   useEffect(() => {
-    chatMessagesListRef.current?.scrollToBottom(true);
+    chatMessagesListRef.current?.scrollToBottom(false);
   }, []);
 
   useEffect(() => {
@@ -60,6 +78,16 @@ const Chat: React.FC<ChatProps> = ({
 
     lastKnownMessagesLength.current = messages.length;
   }, [messages, isScrolledUp]);
+
+  useImperativeHandle(ref, () => ({
+    scrollToBottom: () => {
+      chatMessagesListRef.current?.scrollToBottom(true);
+    },
+
+    focusChatInput: () => {
+      chatInputRef.current?.focus();
+    },
+  }));
 
   const handleClickOutside = useCallback((event: MouseEvent) => {
     if (
@@ -221,6 +249,7 @@ const Chat: React.FC<ChatProps> = ({
 
       {!hideChatInput && (
         <ChatInput
+          ref={chatInputRef}
           onSend={handleSend}
           leftSlot={addAttachmentButton}
           disabled={disableChatInput}
@@ -230,4 +259,4 @@ const Chat: React.FC<ChatProps> = ({
   );
 };
 
-export default Chat;
+export default forwardRef(Chat);

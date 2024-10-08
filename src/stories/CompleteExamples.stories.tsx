@@ -1,6 +1,14 @@
+import { Transition } from "@headlessui/react";
 import type { Meta, StoryObj } from "@storybook/react";
-import { Chat, ChatMessage, ChatMessageStatus, ChatPreview } from "..";
-import { useCallback, useState } from "react";
+import {
+  Chat,
+  ChatHandle,
+  ChatMessage,
+  ChatMessageStatus,
+  ChatPreview,
+} from "..";
+import { useCallback, useEffect, useRef, useState } from "react";
+import { clsx } from "clsx";
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
 const meta = {
@@ -8,7 +16,7 @@ const meta = {
   component: Chat,
   parameters: {
     // Optional parameter to center the component in the Canvas. More info: https://storybook.js.org/docs/configure/story-layout
-    // layout: "fullscreen",
+    layout: "fullscreen",
     backgrounds: {
       values: [{ name: "black", value: "#333" }],
     },
@@ -28,9 +36,19 @@ type Story = StoryObj<typeof meta>;
 
 // More on writing stories with args: https://storybook.js.org/docs/writing-stories/args
 export const WhatsApp: Story = {
+  name: "WhatsApp",
   render: (args) => {
     const [isChatOpen, setIsChatOpen] = useState(false);
     const [messages, setMessages] = useState<ChatMessage[]>(args.messages);
+    const chatRef = useRef<any>(null);
+
+    useEffect(() => {
+      if (isChatOpen) {
+        setTimeout(() => {
+          chatRef.current?.focusChatInput();
+        }, 301);
+      }
+    }, [isChatOpen]);
 
     const handleSend = useCallback((message: ChatMessage) => {
       setMessages((prevMessages) => {
@@ -72,37 +90,50 @@ export const WhatsApp: Story = {
     }, []);
 
     return (
-      <div style={{ height: "100%", background: "#1F1F1F" }}>
-        {isChatOpen && (
-          <Chat
-            {...args}
-            messages={messages}
-            onSend={handleSend}
-            onClose={() => setIsChatOpen(false)}
-          />
-        )}
-
-        {!isChatOpen && (
-          <div className="flex flex-col px-2">
-            <button className="py-2" onClick={() => setIsChatOpen(true)}>
-              <ChatPreview
-                name="Wife"
-                previewText="Dear John, please Johnny please come home..."
-                timestamp="07:53 PM"
-                profilePhotoUrl="https://randomuser.me/api/portraits/women/10.jpg"
-              />
-            </button>
-
-            <div className="py-2 border-t border-zinc-800">
-              <ChatPreview
-                name="Roommate"
-                previewText="Don't forget to pick up the groceries on the way home, remember the list I sent you last night!"
-                timestamp="06:50 PM"
-                profilePhotoUrl="https://randomuser.me/api/portraits/men/93.jpg"
-              />
-            </div>
+      <div
+        className="h-full relative overflow-hidden"
+        style={{ background: "#1F1F1F" }}
+      >
+        <Transition show={isChatOpen}>
+          <div
+            style={{ background: "#1F1F1F" }}
+            className={clsx(
+              "h-full absolute top-0 left-0 right-0 bottom-0 z-10 ease-in duration-300",
+              "data-[closed]:translate-x-full",
+              "data-[enter]:translate-x-full",
+              "data-[leave]:duration-200"
+            )}
+          >
+            <Chat
+              ref={chatRef}
+              {...args}
+              messages={messages}
+              onSend={handleSend}
+              onClose={() => setIsChatOpen(false)}
+            />
           </div>
-        )}
+        </Transition>
+
+        <div className="flex flex-col px-2">
+          <button className="py-2" onClick={() => setIsChatOpen(true)}>
+            <ChatPreview
+              name="Wife"
+              previewText="Dear John, please Johnny please come home..."
+              timestamp="07:53 PM"
+              profilePhotoUrl="https://randomuser.me/api/portraits/women/10.jpg"
+            />
+          </button>
+
+          <div className="py-2 border-t border-zinc-800">
+            <ChatPreview
+              name="Drake"
+              previewText="Don't forget to feed the horses and clean up the barn. I'll be home late."
+              timestamp="06:50 PM"
+              profilePhotoUrl="https://randomuser.me/api/portraits/men/93.jpg"
+              status={ChatMessageStatus.SEEN}
+            />
+          </div>
+        </div>
       </div>
     );
   },

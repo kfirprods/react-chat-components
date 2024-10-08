@@ -1,5 +1,7 @@
+"use client";
+
 import clsx from "clsx";
-import React from "react";
+import React, { forwardRef, useImperativeHandle } from "react";
 import PaperPlaneIcon from "../svg-icons/PaperPlaneIcon";
 
 export type ChatInputProps = {
@@ -12,15 +14,29 @@ export type ChatInputProps = {
   disabled?: boolean;
 };
 
-const ChatInput: React.FC<ChatInputProps> = ({
-  onSend,
-  placeholder,
-  defaultValue,
-  leftSlot,
-  rightSlot,
-  disabled,
-}) => {
+export type ChatInputHandle = {
+  focus: () => void;
+};
+
+const ChatInput: React.ForwardRefRenderFunction<
+  ChatInputHandle,
+  ChatInputProps
+> = (
+  { onSend, placeholder, defaultValue, leftSlot, rightSlot, disabled },
+  ref
+) => {
   const [text, setText] = React.useState(defaultValue || "");
+  const inputRef = React.useRef<HTMLInputElement>(null);
+
+  useImperativeHandle(
+    ref,
+    () => ({
+      focus: () => {
+        inputRef.current?.focus({ preventScroll: true });
+      },
+    }),
+    []
+  );
 
   const sendButton = (
     <button
@@ -60,6 +76,7 @@ const ChatInput: React.FC<ChatInputProps> = ({
       {leftSlot}
 
       <input
+        ref={inputRef}
         className="bg-zinc-600 text-slate-50 flex-1 rounded-2xl px-3 py-1 focus:outline-none text-sm"
         type="text"
         placeholder={placeholder}
@@ -74,4 +91,4 @@ const ChatInput: React.FC<ChatInputProps> = ({
   );
 };
 
-export default ChatInput;
+export default forwardRef(ChatInput);
