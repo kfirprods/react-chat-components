@@ -114,13 +114,20 @@ export const WhatsApp: Story = {
           </div>
         </Transition>
 
-        <div className="flex flex-col px-2">
+        <div className="flex flex-col px-4">
+          <h2 className="text-white text-2xl font-bold">Chats</h2>
+
           <button className="py-2" onClick={() => setIsChatOpen(true)}>
             <ChatPreview
               name="Wife"
               previewText="Dear John, please Johnny please come home..."
               timestamp="07:53 PM"
               profilePhotoUrl="https://randomuser.me/api/portraits/women/10.jpg"
+              slotBelowTimestamp={
+                <span className="inline-flex place-content-center rounded-full bg-green-500 text-xs font-semibold text-black leading-5 w-5 h-5">
+                  1
+                </span>
+              }
             />
           </button>
 
@@ -162,7 +169,6 @@ export const WhatsApp: Story = {
           minute: "2-digit",
         }),
         alignment: "left",
-        isLastInGroup: true,
       },
       {
         id: "image-attachment",
@@ -180,6 +186,7 @@ export const WhatsApp: Story = {
             title: "Wife",
           },
         ],
+        isLastInGroup: true,
       },
     ],
     onSend: () => {},

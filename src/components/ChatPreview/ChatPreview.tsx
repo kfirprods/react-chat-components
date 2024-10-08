@@ -8,6 +8,7 @@ export type ChatPreviewProps = {
   profilePhotoUrl?: string;
   status?: ChatMessageStatus;
   timestamp?: string;
+  slotBelowTimestamp?: React.ReactNode;
 };
 
 const ChatPreview: React.FC<ChatPreviewProps> = ({
@@ -16,6 +17,7 @@ const ChatPreview: React.FC<ChatPreviewProps> = ({
   profilePhotoUrl,
   status,
   timestamp,
+  slotBelowTimestamp,
 }) => {
   return (
     <div className="flex flex-row gap-3 text-sm text-slate-200 select-none min-h-16">
@@ -35,11 +37,15 @@ const ChatPreview: React.FC<ChatPreviewProps> = ({
         </p>
       </div>
 
-      {timestamp && (
-        <div className="self-start text-xs text-gray-400 flex-none">
-          {timestamp}
-        </div>
-      )}
+      <div className="flex flex-col items-end gap-1">
+        {timestamp && (
+          <div className="self-start text-xs text-gray-400 flex-none">
+            {timestamp}
+          </div>
+        )}
+
+        {slotBelowTimestamp && <div>{slotBelowTimestamp}</div>}
+      </div>
     </div>
   );
 };

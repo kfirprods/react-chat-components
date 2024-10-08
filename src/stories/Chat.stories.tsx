@@ -100,7 +100,6 @@ export const Basic: Story = {
           minute: "2-digit",
         }),
         alignment: "left",
-        isLastInGroup: true,
       },
       {
         id: "image-attachment",
@@ -118,6 +117,7 @@ export const Basic: Story = {
             title: "Wife",
           },
         ],
+        isLastInGroup: true,
       },
     ],
     onSend: () => {},
