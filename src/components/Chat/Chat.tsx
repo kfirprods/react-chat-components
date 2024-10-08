@@ -10,12 +10,14 @@ import AttachmentViewer from "../AttachmentViewer/AttachmentViewer";
 import clsx from "clsx";
 import styles from "./Chat.module.css";
 import { CSSTransition } from "react-transition-group";
-import MenuItem from "../MenuItem/MenuItem";
+import AddAttachmentsMenu from "../AddAttachmentsMenu/AddAttachmentsMenu";
+import ChevronDownIcon from "../svg-icons/ChevronDownIcon";
 
 export type ChatProps = {
   chatTitle: string;
   messages: ChatMessage[];
   onSend: (message: ChatMessage) => void;
+  onClose: () => void;
   chatSubtitle?: string;
   profilePhotoUrl?: string;
   disableChatInput?: boolean;
@@ -30,6 +32,7 @@ const Chat: React.FC<ChatProps> = ({
   hideChatInput,
   messages,
   onSend,
+  onClose,
 }) => {
   const [currentOpenAttachment, setCurrentOpenAttachment] = useState<{
     message: ChatMessage;
@@ -44,6 +47,10 @@ const Chat: React.FC<ChatProps> = ({
 
   const toggleAttachmentsMenu = useCallback(() => {
     setIsAttachmentsMenuOpen((isOpen) => !isOpen);
+  }, []);
+
+  useEffect(() => {
+    chatMessagesListRef.current?.scrollToBottom(true);
   }, []);
 
   useEffect(() => {
@@ -86,6 +93,23 @@ const Chat: React.FC<ChatProps> = ({
     });
   }
 
+  const handleAttachmentFilesSelected = useCallback(
+    (files: File[]) => {
+      onSend({
+        id: uuidv4(),
+        alignment: "right",
+        status: ChatMessageStatus.SENDING,
+        attachments: files.map((file) => ({
+          id: uuidv4(),
+          url: URL.createObjectURL(file),
+          type: file.type.split("/")[0] as MessageAttachment["type"],
+          title: file.name,
+        })),
+      });
+    },
+    [onSend]
+  );
+
   const handleScrolledUpChange = useCallback((isScrolledUp: boolean) => {
     setIsScrolledUp(isScrolledUp);
   }, []);
@@ -98,40 +122,6 @@ const Chat: React.FC<ChatProps> = ({
       });
     },
     []
-  );
-
-  const documentIcon = (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      fill="none"
-      viewBox="0 0 24 24"
-      strokeWidth={1.5}
-      stroke="currentColor"
-      className="size-6"
-    >
-      <path
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z"
-      />
-    </svg>
-  );
-
-  const photoIcon = (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      fill="none"
-      viewBox="0 0 24 24"
-      strokeWidth={1.5}
-      stroke="currentColor"
-      className="size-6"
-    >
-      <path
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        d="m2.25 15.75 5.159-5.159a2.25 2.25 0 0 1 3.182 0l5.159 5.159m-1.5-1.5 1.409-1.409a2.25 2.25 0 0 1 3.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 0 0 1.5-1.5V6a1.5 1.5 0 0 0-1.5-1.5H3.75A1.5 1.5 0 0 0 2.25 6v12a1.5 1.5 0 0 0 1.5 1.5Zm10.5-11.25h.008v.008h-.008V8.25Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z"
-      />
-    </svg>
   );
 
   const addAttachmentButton = (
@@ -149,6 +139,7 @@ const Chat: React.FC<ChatProps> = ({
           exit: styles["menu-exit"],
           exitActive: styles["menu-exit-active"],
         }}
+        nodeRef={menuRef}
       >
         <div
           ref={menuRef}
@@ -157,16 +148,7 @@ const Chat: React.FC<ChatProps> = ({
             styles["attachment-menu"]
           )}
         >
-          <MenuItem
-            text="Documents"
-            onClick={() => {}}
-            leftSlot={documentIcon}
-          />
-          <MenuItem
-            text="Photos & Videos"
-            onClick={() => {}}
-            leftSlot={photoIcon}
-          />
+          <AddAttachmentsMenu onSelect={handleAttachmentFilesSelected} />
         </div>
       </CSSTransition>
 
@@ -200,25 +182,6 @@ const Chat: React.FC<ChatProps> = ({
     </div>
   );
 
-  const chevronDownIcon = (
-    <svg
-      viewBox="0 0 1024 1024"
-      version="1.1"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        d="M830.3616 881.5616C922.2144 789.7088 972.8 667.5456 972.8 537.6s-50.5856-252.0576-142.4384-343.9104-214.016-142.4384-343.9616-142.4384-252.0576 50.5856-343.9616 142.4384S0 407.7056 0 537.6s50.5856 252.0576 142.4384 343.9616S356.4544 1024 486.4 1024s252.0576-50.5856 343.9616-142.4384zM51.2 537.6C51.2 297.6256 246.4256 102.4 486.4 102.4S921.6 297.6256 921.6 537.6c0 239.9744-195.2256 435.2-435.2 435.2S51.2 777.5744 51.2 537.6z"
-        fill="white"
-        strokeWidth={2}
-      />
-      <path
-        d="M204.8 460.8a25.6 25.6 0 0 1 43.6736-18.1248l237.8752 237.8752 237.8752-237.8752a25.6 25.6 0 0 1 36.1984 36.1984l-256 256a25.6 25.6 0 0 1-36.1984 0l-256-256a25.4976 25.4976 0 0 1-7.4752-18.1248z"
-        fill="white"
-        strokeWidth={10}
-      />
-    </svg>
-  );
-
   return (
     <div className="flex flex-col h-full relative">
       {currentOpenAttachment && (
@@ -233,6 +196,7 @@ const Chat: React.FC<ChatProps> = ({
         title={chatTitle}
         subtitle={chatSubtitle}
         profilePhotoUrl={profilePhotoUrl}
+        onClose={onClose}
       />
 
       <div className="relative flex-1 flex flex-col min-h-0">
@@ -248,7 +212,9 @@ const Chat: React.FC<ChatProps> = ({
             className="absolute bottom-4 right-0 bg-zinc-800 rounded-l-lg w-11 h-8 flex place-items-center place-content-center"
             onClick={() => chatMessagesListRef.current?.scrollToBottom(true)}
           >
-            <div className="w-5 h-5">{chevronDownIcon}</div>
+            <div className="w-5 h-5">
+              <ChevronDownIcon />
+            </div>
           </button>
         )}
       </div>

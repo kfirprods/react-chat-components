@@ -64,6 +64,7 @@ export const LeftSlot: Story = {
 
 export const RightSlot: Story = {
   args: {
+    placeholder: "Type something and the right slot will be hidden",
     onSend: () => {},
     rightSlot: (
       <button title="Camera" style={{ transform: "translateY(-5px)" }}>

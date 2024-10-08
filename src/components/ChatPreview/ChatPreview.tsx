@@ -22,12 +22,13 @@ const ChatPreview: React.FC<ChatPreviewProps> = ({
       <ProfilePicture profilePhotoUrl={profilePhotoUrl} size="xl" />
 
       <div className="flex-1">
-        <h3 className="font-semibold line-clamp-1">{name}</h3>
-        <p className="line-clamp-2 text-gray-400">
-          <span className="inline-flex mr-0.5 translate-y-0.5">
-            {status && <MessageStatusIcon status={status} />}
-          </span>
-
+        <h3 className="text-start font-semibold line-clamp-1">{name}</h3>
+        <p className="text-start line-clamp-2 text-gray-400">
+          {status && (
+            <span className="inline-flex mr-0.5 translate-y-0.5">
+              <MessageStatusIcon status={status} />
+            </span>
+          )}
           <span>{previewText}</span>
         </p>
       </div>

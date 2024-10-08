@@ -1,5 +1,6 @@
 import clsx from "clsx";
 import ProfilePicture from "../ProfilePicture/ProfilePicture";
+import ChevronLeftIcon from "../svg-icons/ChevronLeftIcon";
 
 export type ChatNavBarProps = {
   title: string;
@@ -7,8 +8,8 @@ export type ChatNavBarProps = {
   profilePhotoUrl?: string;
   hideBackButton?: boolean;
   backButtonUnreadCount?: number;
+  onClose?: () => void;
   onClick?: () => void;
-
   rightSlot?: React.ReactNode;
 };
 
@@ -19,30 +20,19 @@ const ChatNavBar: React.FC<ChatNavBarProps> = ({
   hideBackButton,
   backButtonUnreadCount,
   onClick,
+  onClose,
   rightSlot,
 }) => {
-  const chevronLeft = (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      fill="none"
-      viewBox="0 0 24 24"
-      strokeWidth={2}
-      stroke="currentColor"
-      className="size-6"
-    >
-      <path
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        d="M15.75 19.5 8.25 12l7.5-7.5"
-      />
-    </svg>
-  );
-
   const backButtonUnreadCountText = backButtonUnreadCount
     ? backButtonUnreadCount > 99
       ? "99+"
       : backButtonUnreadCount
     : "";
+
+  const handleBackButtonClick = (event: React.MouseEvent) => {
+    event.stopPropagation();
+    onClose?.();
+  };
 
   return (
     <div
@@ -56,8 +46,11 @@ const ChatNavBar: React.FC<ChatNavBarProps> = ({
       onClick={onClick}
     >
       {!hideBackButton && (
-        <button className="flex-none text-slate-100 min-w-7 h-7 flex flex-row place-items-center">
-          {chevronLeft}
+        <button
+          className="flex-none text-slate-100 min-w-7 h-7 flex flex-row place-items-center"
+          onClick={handleBackButtonClick}
+        >
+          <ChevronLeftIcon />
 
           {backButtonUnreadCountText && (
             <span className="mr-2">{backButtonUnreadCountText}</span>

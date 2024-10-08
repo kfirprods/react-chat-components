@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { CSSTransition } from "react-transition-group";
 import clsx from "clsx";
 import { ChatMessage, MessageAttachment } from "../../types";
@@ -16,6 +16,8 @@ const AttachmentViewer: React.FC<AttachmentViewerProps> = ({
   context,
   onClose,
 }) => {
+  const imgRef = useRef<HTMLImageElement>(null);
+
   const [showImage, setShowImage] = useState(false);
 
   const handleClose = useCallback(() => {
@@ -94,17 +96,18 @@ const AttachmentViewer: React.FC<AttachmentViewerProps> = ({
         unmountOnExit
         appear
         onExited={onClose}
+        nodeRef={imgRef}
       >
         <img
+          ref={imgRef}
           src={current.url}
           alt="Full size attachment"
-          className={clsx(
-            "flex-1 object-contain min-h-0",
-            styles["animated-image"],
-            {
-              [styles.right]: context?.alignment === "right",
-            }
-          )}
+          className={clsx("flex-1 object-contain min-h-0", {
+            "origin-[0%_50%]":
+              !context?.alignment || context.alignment === "left",
+            "origin-[100%_50%]": context?.alignment === "right",
+            "origin-center": context?.alignment === "stretch",
+          })}
         />
       </CSSTransition>
 

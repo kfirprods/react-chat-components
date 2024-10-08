@@ -33,24 +33,35 @@ type Story = StoryObj<typeof meta>;
 // More on writing stories with args: https://storybook.js.org/docs/writing-stories/args
 export const Basic: Story = {
   args: {
-    title: "John Doe",
+    title: "Jane Doe",
     subtitle: "Active now",
-    profilePhotoUrl: "https://randomuser.me/api/portraits/men/94.jpg",
+    profilePhotoUrl: "https://randomuser.me/api/portraits/women/21.jpg",
+    onClose: () => alert("Back button clicked!"),
   },
 };
 
 export const WithoutBackButton: Story = {
   args: {
     hideBackButton: true,
-    title: "John Doe",
+    title: "Jane Doe",
     subtitle: "Active now",
-    profilePhotoUrl: "https://randomuser.me/api/portraits/men/94.jpg",
+    profilePhotoUrl: "https://randomuser.me/api/portraits/women/21.jpg",
+    onClose: () => alert("Back button clicked!"),
   },
 };
 
 export const WithoutSubtitle: Story = {
   args: {
-    title: "John Doe",
+    title: "Jane Doe",
+    profilePhotoUrl: "https://randomuser.me/api/portraits/women/21.jpg",
+    onClose: () => alert("Back button clicked!"),
+  },
+};
+
+export const WithoutProfilePhoto: Story = {
+  args: {
+    title: "Jane Doe",
+    onClose: () => alert("Back button clicked!"),
   },
 };
 
@@ -58,17 +69,19 @@ export const UnreadCount: Story = {
   args: {
     hideBackButton: false,
     backButtonUnreadCount: 1,
-    title: "John Doe",
+    title: "Jane Doe",
     subtitle: "Active now",
-    profilePhotoUrl: "https://randomuser.me/api/portraits/men/94.jpg",
+    profilePhotoUrl: "https://randomuser.me/api/portraits/women/21.jpg",
+    onClose: () => alert("Back button clicked!"),
   },
 };
 
 export const RenderButtonsViaSlot: Story = {
   args: {
-    title: "John Doe",
+    title: "Jane Doe",
     subtitle: "Active now",
-    profilePhotoUrl: "https://randomuser.me/api/portraits/men/94.jpg",
+    profilePhotoUrl: "https://randomuser.me/api/portraits/women/21.jpg",
+    onClose: () => alert("Back button clicked!"),
     rightSlot: (
       <button className="text-white mr-2">
         <svg
@@ -96,14 +109,16 @@ export const LongTexts: Story = {
       "A very very long group name that probably exceeds the width of the screen",
     subtitle:
       'Click here for more information about "A very very long group name that porbably exceeds the width of the screen"',
-    profilePhotoUrl: "https://randomuser.me/api/portraits/men/94.jpg",
+    profilePhotoUrl: "https://randomuser.me/api/portraits/women/21.jpg",
+    onClose: () => alert("Back button clicked!"),
   },
 };
 
 export const Clickable: Story = {
   args: {
-    title: "John Doe",
+    title: "Jane Doe",
     subtitle: "Click for more info",
     onClick: () => alert("Clicked!"),
+    onClose: () => alert("Back button clicked!"),
   },
 };

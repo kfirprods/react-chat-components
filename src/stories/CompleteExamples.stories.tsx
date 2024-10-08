@@ -1,33 +1,35 @@
 import type { Meta, StoryObj } from "@storybook/react";
-
-import { Chat, ChatMessage, ChatMessageStatus } from "..";
+import { Chat, ChatMessage, ChatMessageStatus, ChatPreview } from "..";
 import { useCallback, useState } from "react";
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
 const meta = {
-  title: "Chat/Chat",
+  title: "Examples/Full",
   component: Chat,
   parameters: {
     // Optional parameter to center the component in the Canvas. More info: https://storybook.js.org/docs/configure/story-layout
-    layout: "fullscreen",
+    // layout: "fullscreen",
     backgrounds: {
       values: [{ name: "black", value: "#333" }],
+    },
+
+    docs: {
+      description: {
+        component: `Example`,
+      },
     },
   },
   // This component will have an automatically generated Autodocs entry: https://storybook.js.org/docs/writing-docs/autodocs
   tags: ["autodocs"],
-  // More on argTypes: https://storybook.js.org/docs/api/argtypes
-  argTypes: {
-    chatTitle: { control: "text" },
-  },
 } satisfies Meta<typeof Chat>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
 
 // More on writing stories with args: https://storybook.js.org/docs/writing-stories/args
-export const Basic: Story = {
+export const WhatsApp: Story = {
   render: (args) => {
+    const [isChatOpen, setIsChatOpen] = useState(false);
     const [messages, setMessages] = useState<ChatMessage[]>(args.messages);
 
     const handleSend = useCallback((message: ChatMessage) => {
@@ -71,7 +73,36 @@ export const Basic: Story = {
 
     return (
       <div style={{ height: "100%", background: "#1F1F1F" }}>
-        <Chat {...args} messages={messages} onSend={handleSend} />
+        {isChatOpen && (
+          <Chat
+            {...args}
+            messages={messages}
+            onSend={handleSend}
+            onClose={() => setIsChatOpen(false)}
+          />
+        )}
+
+        {!isChatOpen && (
+          <div className="flex flex-col px-2">
+            <button className="py-2" onClick={() => setIsChatOpen(true)}>
+              <ChatPreview
+                name="Wife"
+                previewText="Dear John, please Johnny please come home..."
+                timestamp="07:53 PM"
+                profilePhotoUrl="https://randomuser.me/api/portraits/women/10.jpg"
+              />
+            </button>
+
+            <div className="py-2 border-t border-zinc-800">
+              <ChatPreview
+                name="Roommate"
+                previewText="Don't forget to pick up the groceries on the way home, remember the list I sent you last night!"
+                timestamp="06:50 PM"
+                profilePhotoUrl="https://randomuser.me/api/portraits/men/93.jpg"
+              />
+            </div>
+          </div>
+        )}
       </div>
     );
   },
@@ -121,56 +152,5 @@ export const Basic: Story = {
       },
     ],
     onSend: () => {},
-  },
-};
-
-export const NoInput: Story = {
-  render: (args) => {
-    return (
-      <div className="h-full flex flex-col" style={{ background: "#1F1F1F" }}>
-        <Chat {...args} />
-
-        <div className="text-xs font-semibold bg-zinc-600 text-zinc-200 px-5 py-2 text-center">
-          You can't send messages in this chat because you blocked this contact
-        </div>
-      </div>
-    );
-  },
-
-  args: {
-    hideChatInput: true,
-    chatTitle: "Johnny Walker's Wife",
-    chatSubtitle: "Last seen yesterday",
-    onSend: () => {},
-    onClose: () => {},
-    messages: [
-      {
-        id: "initial",
-        customRender: (
-          <p className="text-center mb-3">
-            <span className="inline-flex items-center rounded-md bg-zinc-800 px-2 py-1 text-xs font-medium text-slate-200 ring-1 ring-inset ring-zinc-600/40">
-              Yesterday
-            </span>
-          </p>
-        ),
-      },
-      {
-        id: "greeting",
-        textualContent: "Dear John, please Johnny please come home...",
-        timestamp: "10:00 AM",
-        alignment: "left",
-        isLastInGroup: true,
-      },
-      {
-        id: "initial",
-        customRender: (
-          <p className="text-center mb-3">
-            <span className="inline-flex items-center rounded-md bg-red-800 px-2 py-1 text-xs font-medium text-slate-200 ring-1 ring-inset ring-red-600/50">
-              You have blocked this contact
-            </span>
-          </p>
-        ),
-      },
-    ],
   },
 };

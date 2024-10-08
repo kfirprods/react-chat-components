@@ -31,10 +31,17 @@ const MessageContent: React.FC<MessageContentProps> = ({
     return simpleText;
   }
 
+  const imageAttachments = message.attachments.filter(
+    (attachment) => attachment.type === "image"
+  );
+  const unsupportedAttachments = message.attachments.filter(
+    (attachment) => attachment.type !== "image"
+  );
+
   return (
     <div className="flex flex-col max-w-60">
       <div className="flex flex-row gap-1 flex-wrap">
-        {message.attachments.map((attachment) => (
+        {imageAttachments.map((attachment) => (
           <img
             key={attachment.id}
             draggable={false}
@@ -47,6 +54,13 @@ const MessageContent: React.FC<MessageContentProps> = ({
             onClick={() => onAttachmentClick?.(attachment, message)}
           />
         ))}
+
+        {unsupportedAttachments.length > 0 && (
+          <p className="text-sm italic text-zinc-300 select-none">
+            This message contains {unsupportedAttachments.length} unsupported
+            file attachments
+          </p>
+        )}
       </div>
 
       {simpleText}
