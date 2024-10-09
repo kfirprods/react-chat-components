@@ -29,7 +29,7 @@ const ChatPreview: React.FC<ChatPreviewProps> = ({
         <h3 className="chat-preview-title text-start font-semibold line-clamp-1">
           {name}
         </h3>
-        <p className="chat-preview-subtitle text-start line-clamp-2 subtext-color leading-4">
+        <p className="chat-preview-subtitle text-start line-clamp-2 subtext-color leading-[1.1rem]">
           {status && (
             <span className="inline-flex mr-1 translate-y-0.5">
               <MessageStatusIcon status={status} />

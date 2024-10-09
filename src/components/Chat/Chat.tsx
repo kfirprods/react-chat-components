@@ -237,7 +237,7 @@ const Chat: React.ForwardRefRenderFunction<ChatHandle, ChatProps> = (
 
         {isScrolledUp && (
           <button
-            className="absolute bottom-4 right-0 bg-zinc-800 rounded-l-lg w-11 h-8 flex place-items-center place-content-center ring-1 ring-zinc-700/80"
+            className="scroll-to-bottom-button absolute bottom-4 right-0 rounded-l-lg w-11 h-8 flex place-items-center place-content-center ring-1 ring-zinc-400/20"
             onClick={() => chatMessagesListRef.current?.scrollToBottom(true)}
           >
             <div className="w-5 h-5">

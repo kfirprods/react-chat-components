@@ -102,3 +102,11 @@
     var(--default-chat-bubble-right-bg-color)
   );
 }
+
+.scroll-to-bottom-button {
+  color: var(--scroll-to-bottom-button-color, var(--text-color));
+  background-color: var(
+    --scroll-to-bottom-button-bg-color,
+    var(--elevated-bg-color)
+  );
+}
