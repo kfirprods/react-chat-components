@@ -71,7 +71,7 @@ const ChatMessagesList: React.ForwardRefRenderFunction<
     <div
       ref={containerRef}
       className={clsx(
-        "h-full flex-1 flex flex-col gap-1 px-2.5 py-2 overflow-auto text-slate-200 font-normal",
+        "h-full flex-1 flex flex-col gap-1 px-2.5 py-2 overflow-auto font-normal",
         styles["chat-messages-list"]
       )}
       onScroll={handleScroll}

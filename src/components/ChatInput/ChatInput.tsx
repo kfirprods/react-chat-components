@@ -48,7 +48,6 @@ const ChatInput: React.ForwardRefRenderFunction<
         {
           "bg-green-500": text.length > 0,
           "bg-zinc-500": text.length === 0,
-          "text-zinc-700": text.length === 0,
         }
       )}
     >
