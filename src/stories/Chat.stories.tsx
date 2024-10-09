@@ -139,7 +139,7 @@ export const NoInput: Story = {
 
   args: {
     hideChatInput: true,
-    chatTitle: "Johnny Walker's Wife",
+    chatTitle: "Wife",
     chatSubtitle: "Last seen yesterday",
     onSend: () => {},
     onClose: () => {},

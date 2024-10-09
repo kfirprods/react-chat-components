@@ -41,7 +41,7 @@ const meta = {
 
     docs: {
       description: {
-        component: `Example`,
+        component: `An example that demonstrates how to build a mock of the WhatsApp interface, inspired by its iOS light mode. We achieve this by overriding approx. 10 CSS variables that affect colors, leaving everything else in place.`,
       },
     },
   },
@@ -134,7 +134,16 @@ export const WhatsAppLight: Story = {
         <div className="flex flex-col px-4">
           <h2 className="text-2xl font-bold my-2">Chats</h2>
 
-          <button className="py-2" onClick={() => setIsChatOpen(true)}>
+          <button
+            className="py-2"
+            onClick={() => setIsChatOpen(true)}
+            style={
+              {
+                // override the color of this specific ChatPreview instance's timestamp
+                "--chat-preview-timestamp-color": "rgb(34, 197, 94)",
+              } as React.CSSProperties
+            }
+          >
             <ChatPreview
               name="Wife"
               previewText="Dear John, please Johnny please come home..."
