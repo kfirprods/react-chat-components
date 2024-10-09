@@ -172,7 +172,7 @@ const Chat: React.ForwardRefRenderFunction<ChatHandle, ChatProps> = (
         <div
           ref={menuRef}
           className={clsx(
-            "absolute max-w-80 px-2 py-3 ring-1 ring-slate-600 bg-zinc-700 origin-bottom-left rounded-xl text-zinc-300 flex flex-col whitespace-nowrap",
+            "attachments-menu-container absolute max-w-80 px-2 py-3 border origin-bottom-left rounded-xl flex flex-col whitespace-nowrap",
             styles["attachment-menu"]
           )}
         >
@@ -184,7 +184,7 @@ const Chat: React.ForwardRefRenderFunction<ChatHandle, ChatProps> = (
         ref={attachmentsButtonRef}
         onClick={toggleAttachmentsMenu}
         className={clsx(
-          "flex place-items-center place-content-center w-7 h-7 text-slate-200 transition-all origin-center rounded-full",
+          "input-add-attachments-button flex place-items-center place-content-center w-7 h-7 transition-all origin-center rounded-full",
           {
             "bg-zinc-400/60": isAttachmentsMenuOpen,
           }
@@ -237,7 +237,7 @@ const Chat: React.ForwardRefRenderFunction<ChatHandle, ChatProps> = (
 
         {isScrolledUp && (
           <button
-            className="absolute bottom-4 right-0 bg-zinc-800 rounded-l-lg w-11 h-8 flex place-items-center place-content-center"
+            className="absolute bottom-4 right-0 bg-zinc-800 rounded-l-lg w-11 h-8 flex place-items-center place-content-center ring-1 ring-zinc-700/80"
             onClick={() => chatMessagesListRef.current?.scrollToBottom(true)}
           >
             <div className="w-5 h-5">

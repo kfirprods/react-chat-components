@@ -9,10 +9,11 @@ import {
 } from "..";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { clsx } from "clsx";
+import styles from "./CompleteExamples.module.css";
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
 const meta = {
-  title: "Examples/Full",
+  title: "Examples/WhatsApp (iOS, Dark)",
   component: Chat,
   parameters: {
     // Optional parameter to center the component in the Canvas. More info: https://storybook.js.org/docs/configure/story-layout
@@ -35,12 +36,12 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 // More on writing stories with args: https://storybook.js.org/docs/writing-stories/args
-export const WhatsApp: Story = {
-  name: "WhatsApp",
+export const WhatsAppDark: Story = {
+  name: "WhatsApp (iOS, Dark)",
   render: (args) => {
     const [isChatOpen, setIsChatOpen] = useState(false);
     const [messages, setMessages] = useState<ChatMessage[]>(args.messages);
-    const chatRef = useRef<any>(null);
+    const chatRef = useRef<ChatHandle>(null);
 
     useEffect(() => {
       if (isChatOpen) {
@@ -96,12 +97,12 @@ export const WhatsApp: Story = {
       >
         <Transition show={isChatOpen}>
           <div
-            style={{ background: "#1F1F1F" }}
             className={clsx(
               "h-full absolute top-0 left-0 right-0 bottom-0 z-10 ease-in duration-300",
               "data-[closed]:translate-x-full",
               "data-[enter]:translate-x-full",
-              "data-[leave]:duration-200"
+              "data-[leave]:duration-200",
+              styles["chat-container-dark"]
             )}
           >
             <Chat
@@ -115,7 +116,7 @@ export const WhatsApp: Story = {
         </Transition>
 
         <div className="flex flex-col px-4">
-          <h2 className="text-white text-2xl font-bold">Chats</h2>
+          <h2 className="text-white text-2xl font-bold my-2">Chats</h2>
 
           <button className="py-2" onClick={() => setIsChatOpen(true)}>
             <ChatPreview

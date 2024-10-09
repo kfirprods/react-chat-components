@@ -44,7 +44,7 @@ const ChatInput: React.ForwardRefRenderFunction<
       onClick={send}
       disabled={text.length === 0 || disabled}
       className={clsx(
-        "h-8 rounded-full aspect-square w-8 flex place-items-center place-content-center p-2",
+        "chat-input-send-button h-8 rounded-full aspect-square w-8 flex place-items-center place-content-center p-2",
         {
           "bg-green-500": text.length > 0,
           "bg-zinc-500": text.length === 0,
@@ -72,12 +72,12 @@ const ChatInput: React.ForwardRefRenderFunction<
   }
 
   return (
-    <div className="bg-zinc-800 flex flex-row place-items-center px-2 py-1 gap-1 border-t border-zinc-700 min-h-11">
+    <div className="chat-input-container flex flex-row place-items-center px-2 py-1 gap-1 border-t min-h-11">
       {leftSlot}
 
       <input
         ref={inputRef}
-        className="bg-zinc-600 text-slate-50 flex-1 rounded-2xl px-3 py-1 focus:outline-none text-sm"
+        className="actual-input flex-1 rounded-2xl px-3 py-1 focus:outline-none text-sm border"
         type="text"
         placeholder={placeholder}
         value={text}

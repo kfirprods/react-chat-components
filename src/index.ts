@@ -1,4 +1,4 @@
-import "./index.css";
+import "./index.scss";
 import ChatPreview from "./components/ChatPreview/ChatPreview";
 import ChatNavBar from "./components/ChatNavBar/ChatNavBar";
 import ChatInput, { ChatInputHandle } from "./components/ChatInput/ChatInput";

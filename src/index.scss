@@ -1,0 +1,88 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --strongest-color: black;
+  --text-color: rgb(226, 232, 240);
+  --subtext-color: rgb(156, 163, 175);
+  --elevated-bg-color: rgb(39, 39, 42);
+  --elevated-bg-border-color: rgb(63, 63, 70);
+  --input-bg-color: rgb(82, 82, 91);
+}
+
+.chat-preview-title {
+  color: var(--chat-preview-title-color, var(--text-color));
+}
+
+.chat-preview-subtitle {
+  color: var(--chat-preview-subtitle-color, var(--subtext-color));
+}
+
+.chat-preview-timestamp {
+  color: var(--chat-preview-timestamp-color, var(--subtext-color));
+}
+
+.chat-nav-bar {
+  background-color: var(--chat-nav-bar-bg-color, var(--elevated-bg-color));
+  border-color: var(
+    --chat-nav-bar-border-color,
+    var(--elevated-bg-border-color)
+  );
+}
+
+.chat-input-container {
+  background-color: var(
+    --chat-input-container-bg-color,
+    var(--elevated-bg-color)
+  );
+  border-color: var(
+    --chat-input-container-border-color,
+    var(--elevated-bg-border-color)
+  );
+}
+
+.actual-input {
+  color: var(--chat-input-text-color, var(--text-color));
+  background-color: var(--chat-input-bg-color, var(--input-bg-color));
+  border-color: var(--chat-input-border-color, var(--input-bg-color));
+}
+
+.chat-input-send-button {
+  color: var(--chat-input-send-button-color, var(--strongest-color));
+}
+
+.chat-nav-bar-back-button {
+  color: var(--chat-nav-bar-back-button-color, var(--text-color));
+}
+
+.chat-nav-bar-title {
+  color: var(--chat-nav-bar-title-color, var(--text-color));
+}
+
+.chat-nav-bar-subtitle {
+  color: var(--chat-nav-bar-subtitle-color, var(--subtext-color));
+}
+
+.input-add-attachments-button {
+  color: var(--input-add-attachments-button-color, var(--text-color));
+}
+
+.attachments-menu-container {
+  background-color: var(
+    --attachments-menu-container-bg-color,
+    var(--elevated-bg-border-color)
+  );
+  border-color: var(
+    --attachments-menu-container-border-color,
+    var(--elevated-bg-color)
+  );
+  color: var(--attachments-menu-container-color, var(--text-color));
+}
+
+.attachments-menu-item:hover {
+  background-color: var(
+    --attachments-menu-item-hover-bg-color,
+    var(--elevated-bg-color)
+  );
+}

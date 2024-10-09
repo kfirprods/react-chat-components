@@ -37,7 +37,7 @@ const ChatNavBar: React.FC<ChatNavBarProps> = ({
   return (
     <div
       className={clsx(
-        "bg-zinc-800 flex flex-row gap-3 place-items-center py-2 border-b border-zinc-700 select-none",
+        "chat-nav-bar flex flex-row gap-3 place-items-center py-2 border-b select-none",
         {
           "px-2": !!hideBackButton,
           "cursor-pointer": !!onClick,
@@ -47,7 +47,7 @@ const ChatNavBar: React.FC<ChatNavBarProps> = ({
     >
       {!hideBackButton && (
         <button
-          className="flex-none text-slate-100 min-w-7 h-7 flex flex-row place-items-center"
+          className="chat-nav-bar-back-button flex-none min-w-7 h-7 flex flex-row place-items-center"
           onClick={handleBackButtonClick}
         >
           <ChevronLeftIcon />
@@ -62,11 +62,13 @@ const ChatNavBar: React.FC<ChatNavBarProps> = ({
         <ProfilePicture profilePhotoUrl={profilePhotoUrl} />
 
         <div className="flex flex-col place-content-center">
-          <p className="text-slate-100 text-sm font-semibold line-clamp-1">
+          <p className="chat-nav-bar-title text-sm font-semibold line-clamp-1">
             {title}
           </p>
           {subtitle && (
-            <p className="text-slate-200 text-xs line-clamp-1">{subtitle}</p>
+            <p className="chat-nav-bar-subtitle text-xs line-clamp-1">
+              {subtitle}
+            </p>
           )}
         </div>
       </div>
