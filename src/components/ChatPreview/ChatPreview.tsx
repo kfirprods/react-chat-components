@@ -22,7 +22,7 @@ const ChatPreview: React.FC<ChatPreviewProps> = ({
   slotBelowTimestamp,
 }) => {
   return (
-    <div className="flex flex-row gap-3 text-sm select-none min-h-16">
+    <div className="chat-preview flex flex-row gap-3 text-sm select-none min-h-16">
       <div className="self-center">
         <ProfilePicture profilePhotoUrl={profilePhotoUrl} size="lg" />
       </div>

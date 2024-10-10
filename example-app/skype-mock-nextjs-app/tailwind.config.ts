@@ -11,6 +11,7 @@ const config: Config = {
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
+        "skype-light-blue": "rgb(224, 250, 255)",
       },
     },
   },

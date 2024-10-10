@@ -18,6 +18,7 @@ const ProfilePicture: React.FC<ProfilePictureProps> = ({
       alt="profile"
       draggable={false}
       className={clsx(
+        "profile-picture",
         "flex-none",
         "rounded-full",
         "aspect-square",

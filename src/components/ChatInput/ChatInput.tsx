@@ -46,7 +46,7 @@ const ChatInput: React.ForwardRefRenderFunction<
       className={clsx(
         "chat-input-send-button h-8 rounded-full aspect-square w-8 flex place-items-center place-content-center p-2",
         {
-          "bg-green-500": text.length > 0,
+          "send-button-enabled": text.length > 0,
           "bg-zinc-500": text.length === 0,
         }
       )}

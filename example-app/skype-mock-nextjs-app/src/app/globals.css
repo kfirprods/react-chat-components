@@ -13,15 +13,17 @@
   /* TODO: prefix all of these with "rcc-" */
   --text-color: black;
   --subtext-color: #474b52;
-  --elevated-bg-color: #f4f4f4;
+  --elevated-bg-color: #fff;
   --elevated-bg-border-color: #e0e0e0;
-  --input-bg-color: white;
+  --input-bg-color: rgb(241, 241, 241);
   --chat-input-border-color: #dbdbdb;
-  --chat-bubble-bg-color: white;
-  --default-chat-bubble-right-bg-color: #cffdcf;
-  --attachments-menu-item-hover-bg-color: #e0e0e0;
-  --attachments-menu-container-bg-color: #f4f4f4;
-  --attachments-menu-container-border-color: #e0e0e0;
+  --chat-bubble-bg-color: rgb(241, 241, 241);
+  --default-chat-bubble-right-bg-color: rgb(204, 247, 255);
+  --default-send-button-bg-color: linear-gradient(
+    135deg,
+    rgb(16, 84, 173),
+    rgb(9, 154, 222)
+  );
 }
 
 @media (prefers-color-scheme: dark) {
@@ -45,4 +47,28 @@ body {
   .text-balance {
     text-wrap: balance;
   }
+}
+
+.bg-skype-light-blue {
+  background-color: rgb(224, 250, 255);
+}
+
+.chat-preview {
+  min-height: 48px;
+}
+
+.chat-preview .profile-picture {
+  width: 40px;
+  height: 40px;
+}
+
+.chat-input-container .actual-input {
+  min-height: 48px;
+  border-radius: 24px;
+  padding: 0 16px;
+}
+
+.chat-input-container .chat-input-send-button {
+  height: 38px;
+  width: 38px;
 }
