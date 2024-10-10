@@ -1,3 +1,5 @@
+"use client";
+
 import clsx from "clsx";
 import ProfilePicture from "../ProfilePicture/ProfilePicture";
 import ChevronLeftIcon from "../svg-icons/ChevronLeftIcon";

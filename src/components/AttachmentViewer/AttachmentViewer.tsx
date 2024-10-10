@@ -1,8 +1,9 @@
+"use client";
+
 import { useCallback, useEffect, useRef, useState } from "react";
 import { CSSTransition } from "react-transition-group";
 import clsx from "clsx";
 import { ChatMessage, MessageAttachment } from "../../types";
-import styles from "./AttachmentViewer.module.css";
 
 export type AttachmentViewerProps = {
   current: MessageAttachment;
@@ -58,7 +59,7 @@ const AttachmentViewer: React.FC<AttachmentViewerProps> = ({
   );
 
   return (
-    <div className="flex flex-col absolute top-0 bottom-0 left-0 right-0 z-50 backdrop-blur-sm bg-slate-800/80 py-1 select-none">
+    <div className="attachment-viewer flex flex-col absolute top-0 bottom-0 left-0 right-0 z-50 backdrop-blur-sm bg-slate-800/80 py-1 select-none">
       <div className="relative flex-none flex flex-row px-2 h-12">
         <div className="flex-1 flex flex-col place-items-center place-content-center">
           {current.title && (
@@ -87,12 +88,7 @@ const AttachmentViewer: React.FC<AttachmentViewerProps> = ({
       <CSSTransition
         in={showImage}
         timeout={300}
-        classNames={{
-          enter: styles["growing-img-enter"],
-          enterActive: styles["growing-img-enter-active"],
-          exit: styles["growing-img-exit"],
-          exitActive: styles["growing-img-exit-active"],
-        }}
+        classNames="growing-img"
         unmountOnExit
         appear
         onExited={onClose}

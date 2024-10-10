@@ -1,5 +1,6 @@
+"use client";
+
 import clsx from "clsx";
-import styles from "./ChatMessagesList.module.css";
 import {
   forwardRef,
   memo,
@@ -72,7 +73,7 @@ const ChatMessagesList: React.ForwardRefRenderFunction<
       ref={containerRef}
       className={clsx(
         "h-full flex-1 flex flex-col gap-1 px-2.5 py-2 overflow-auto font-normal",
-        styles["chat-messages-list"]
+        "chat-messages-list"
       )}
       onScroll={handleScroll}
     >

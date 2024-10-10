@@ -1,3 +1,5 @@
+"use client";
+
 import clsx from "clsx";
 import { ChatMessage, MessageAttachment } from "../../types";
 import MessageStatusIcon from "../MessageStatusIcon/MessageStatusIcon";
@@ -15,7 +17,7 @@ const MessageContent: React.FC<MessageContentProps> = ({
   onAttachmentClick,
 }) => {
   const simpleText = (
-    <p>
+    <p className="w-full break-words">
       {message.textualContent}
 
       {/* A cool hack to reserve space for the absolute-positioned timestamp and status */}

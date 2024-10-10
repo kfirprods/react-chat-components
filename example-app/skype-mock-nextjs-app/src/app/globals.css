@@ -1,0 +1,47 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import "react-chat-components/dist/esm/index.css";
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+
+  --strongest-color: white;
+
+  /* TODO: prefix all of these with "rcc-" */
+  --text-color: black;
+  --subtext-color: #474b52;
+  --elevated-bg-color: #f4f4f4;
+  --elevated-bg-border-color: #e0e0e0;
+  --input-bg-color: white;
+  --chat-input-border-color: #dbdbdb;
+  --chat-bubble-bg-color: white;
+  --default-chat-bubble-right-bg-color: #cffdcf;
+  --attachments-menu-item-hover-bg-color: #e0e0e0;
+  --attachments-menu-container-bg-color: #f4f4f4;
+  --attachments-menu-container-border-color: #e0e0e0;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+body {
+  color: var(--foreground);
+  background: var(--background);
+  font-family: Arial, Helvetica, sans-serif;
+  width: 100vw;
+  height: 100vh;
+  margin: 0;
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}

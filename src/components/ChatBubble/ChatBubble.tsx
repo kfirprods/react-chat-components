@@ -1,7 +1,8 @@
+"use client";
+
 import clsx from "clsx";
 import { ChatMessageStatus } from "../../types";
 import MessageStatusIcon from "../MessageStatusIcon/MessageStatusIcon";
-import styles from "./ChatBubble.module.css";
 import { memo } from "react";
 
 export type ChatBubbleProps = {
@@ -23,8 +24,7 @@ const ChatBubble: React.FC<React.PropsWithChildren<ChatBubbleProps>> = ({
   return (
     <div
       className={clsx(
-        styles["chat-bubble"],
-        "relative rounded-xl px-2.5 py-1.5 flex flex-row place-content-between gap-2 shadow-sm",
+        "max-w-[85%] relative rounded-xl px-2.5 py-1.5 flex flex-row place-content-between gap-2 shadow-sm",
         `chat-bubble chat-bubble-${align}`,
         {
           "self-start": align === "left",

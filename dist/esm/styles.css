@@ -1,7 +1,6 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
 :root {
   --strongest-color: black;
   --text-color: rgb(226, 232, 240);
@@ -26,21 +25,12 @@
 
 .chat-nav-bar {
   background-color: var(--chat-nav-bar-bg-color, var(--elevated-bg-color));
-  border-color: var(
-    --chat-nav-bar-border-color,
-    var(--elevated-bg-border-color)
-  );
+  border-color: var(--chat-nav-bar-border-color, var(--elevated-bg-border-color));
 }
 
 .chat-input-container {
-  background-color: var(
-    --chat-input-container-bg-color,
-    var(--elevated-bg-color)
-  );
-  border-color: var(
-    --chat-input-container-border-color,
-    var(--elevated-bg-border-color)
-  );
+  background-color: var(--chat-input-container-bg-color, var(--elevated-bg-color));
+  border-color: var(--chat-input-container-border-color, var(--elevated-bg-border-color));
 }
 
 .actual-input {
@@ -70,48 +60,29 @@
 }
 
 .attachments-menu-container {
-  background-color: var(
-    --attachments-menu-container-bg-color,
-    var(--elevated-bg-border-color)
-  );
-  border-color: var(
-    --attachments-menu-container-border-color,
-    var(--elevated-bg-color)
-  );
+  background-color: var(--attachments-menu-container-bg-color, var(--elevated-bg-border-color));
+  border-color: var(--attachments-menu-container-border-color, var(--elevated-bg-color));
   color: var(--attachments-menu-container-color, var(--text-color));
 }
 
 .attachments-menu-item:hover {
-  background-color: var(
-    --attachments-menu-item-hover-bg-color,
-    var(--elevated-bg-color)
-  );
+  background-color: var(--attachments-menu-item-hover-bg-color, var(--elevated-bg-color));
 }
 
 .chat-bubble {
   color: var(--chat-bubble-text-color, var(--text-color));
-  background-color: var(
-    --chat-bubble-bg-color,
-    var(--elevated-bg-border-color)
-  );
+  background-color: var(--chat-bubble-bg-color, var(--elevated-bg-border-color));
 }
 
 .chat-bubble.chat-bubble-right {
-  background-color: var(
-    --chat-bubble-right-bg-color,
-    var(--default-chat-bubble-right-bg-color)
-  );
+  background-color: var(--chat-bubble-right-bg-color, var(--default-chat-bubble-right-bg-color));
 }
 
 .scroll-to-bottom-button {
   color: var(--scroll-to-bottom-button-color, var(--text-color));
-  background-color: var(
-    --scroll-to-bottom-button-bg-color,
-    var(--elevated-bg-color)
-  );
+  background-color: var(--scroll-to-bottom-button-bg-color, var(--elevated-bg-color));
 }
 
-// Customize the scrollbar of the chat messages list
 .chat-messages-list::-webkit-scrollbar {
   width: 5px;
 }
@@ -137,45 +108,34 @@
   background: #666;
 }
 
-.attachment-viewer {
-  .growing-img-enter {
-    transform: scale(0.5);
-  }
-
-  .growing-img-enter-active {
-    transform: scale(1);
-    transition: transform 400ms cubic-bezier(0.1, 0.82, 0.25, 1);
-  }
-
-  .growing-img-exit {
-    transform: scale(1);
-  }
-
-  .growing-img-exit-active {
-    transform: scale(0.5);
-    transition: transform 400ms cubic-bezier(0.1, 0.82, 0.25, 1);
-  }
+.attachment-viewer .growing-img-enter {
+  transform: scale(0.5);
+}
+.attachment-viewer .growing-img-enter-active {
+  transform: scale(1);
+  transition: transform 400ms cubic-bezier(0.1, 0.82, 0.25, 1);
+}
+.attachment-viewer .growing-img-exit {
+  transform: scale(1);
+}
+.attachment-viewer .growing-img-exit-active {
+  transform: scale(0.5);
+  transition: transform 400ms cubic-bezier(0.1, 0.82, 0.25, 1);
 }
 
-.chat-container {
-  .attachments-menu-grow-transition-enter {
-    transform: scale(0.2);
-  }
-
-  .attachments-menu-grow-transition-enter-active {
-    transition: transform 200ms ease-in;
-  }
-
-  .attachments-menu-grow-transition-exit-active {
-    transition: transform 100ms linear;
-  }
-
-  .attachments-menu-grow-transition-exit,
-  .attachments-menu-grow-transition-enter-active {
-    transform: scale(1);
-  }
-
-  .attachments-menu-grow-transition-exit-active {
-    transform: scale(0.2);
-  }
+.chat-container .attachments-menu-grow-transition-enter {
+  transform: scale(0.2);
+}
+.chat-container .attachments-menu-grow-transition-enter-active {
+  transition: transform 200ms ease-in;
+}
+.chat-container .attachments-menu-grow-transition-exit-active {
+  transition: transform 100ms linear;
+}
+.chat-container .attachments-menu-grow-transition-exit,
+.chat-container .attachments-menu-grow-transition-enter-active {
+  transform: scale(1);
+}
+.chat-container .attachments-menu-grow-transition-exit-active {
+  transform: scale(0.2);
 }

@@ -17,7 +17,6 @@ import {
 import { ChatMessage, ChatMessageStatus, MessageAttachment } from "../../types";
 import AttachmentViewer from "../AttachmentViewer/AttachmentViewer";
 import clsx from "clsx";
-import styles from "./Chat.module.css";
 import { CSSTransition } from "react-transition-group";
 import AddAttachmentsMenu from "../AddAttachmentsMenu/AddAttachmentsMenu";
 import ChevronDownIcon from "../svg-icons/ChevronDownIcon";
@@ -26,11 +25,13 @@ export type ChatProps = {
   chatTitle: string;
   messages: ChatMessage[];
   onSend: (message: ChatMessage) => void;
-  onClose: () => void;
+
+  hideNavBarBackButton?: boolean;
   chatSubtitle?: string;
   profilePhotoUrl?: string;
   disableChatInput?: boolean;
   hideChatInput?: boolean;
+  onClose?: () => void;
 };
 
 export type ChatHandle = {
@@ -46,6 +47,7 @@ const Chat: React.ForwardRefRenderFunction<ChatHandle, ChatProps> = (
     disableChatInput,
     hideChatInput,
     messages,
+    hideNavBarBackButton,
     onSend,
     onClose,
   },
@@ -161,19 +163,13 @@ const Chat: React.ForwardRefRenderFunction<ChatHandle, ChatProps> = (
           exit: 100,
         }}
         unmountOnExit
-        classNames={{
-          enter: styles["menu-enter"],
-          enterActive: styles["menu-enter-active"],
-          exit: styles["menu-exit"],
-          exitActive: styles["menu-exit-active"],
-        }}
+        classNames="attachments-menu-grow-transition"
         nodeRef={menuRef}
       >
         <div
           ref={menuRef}
           className={clsx(
-            "attachments-menu-container absolute max-w-80 px-2 py-3 border origin-bottom-left rounded-xl flex flex-col whitespace-nowrap",
-            styles["attachment-menu"]
+            "attachments-menu-container bottom-[110%] absolute max-w-80 px-2 py-3 border origin-bottom-left rounded-xl flex flex-col whitespace-nowrap"
           )}
         >
           <AddAttachmentsMenu onSelect={handleAttachmentFilesSelected} />
@@ -197,7 +193,8 @@ const Chat: React.ForwardRefRenderFunction<ChatHandle, ChatProps> = (
           strokeWidth={2}
           stroke="currentColor"
           className={clsx("size-6 transition-all duration-300", {
-            [styles["rotated-x"]]: isAttachmentsMenuOpen,
+            "translate-x-[-1px]": isAttachmentsMenuOpen,
+            "rotate-[225deg]": isAttachmentsMenuOpen,
           })}
         >
           <path
@@ -211,7 +208,7 @@ const Chat: React.ForwardRefRenderFunction<ChatHandle, ChatProps> = (
   );
 
   return (
-    <div className="flex flex-col h-full relative">
+    <div className="chat-container flex flex-col h-full relative">
       {currentOpenAttachment && (
         <AttachmentViewer
           current={currentOpenAttachment.attachment}
@@ -224,6 +221,7 @@ const Chat: React.ForwardRefRenderFunction<ChatHandle, ChatProps> = (
         title={chatTitle}
         subtitle={chatSubtitle}
         profilePhotoUrl={profilePhotoUrl}
+        hideBackButton={hideNavBarBackButton}
         onClose={onClose}
       />
 

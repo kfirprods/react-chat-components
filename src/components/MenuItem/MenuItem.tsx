@@ -1,3 +1,5 @@
+"use client";
+
 export type MenuItemProps = {
   text: string;
   onClick: () => void;

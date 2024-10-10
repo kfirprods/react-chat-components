@@ -1,3 +1,5 @@
+"use client";
+
 import { ChatMessageStatus } from "../../types";
 import MessageStatusIcon from "../MessageStatusIcon/MessageStatusIcon";
 import ProfilePicture from "../ProfilePicture/ProfilePicture";
