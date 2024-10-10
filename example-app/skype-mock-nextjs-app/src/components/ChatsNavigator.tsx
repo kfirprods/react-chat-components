@@ -1,6 +1,17 @@
+"use client";
+
+import { ChatData } from "@/types";
 import { ChatPreview, ProfilePicture } from "react-chat-components";
 
-export default function ChatsNavigator() {
+export type ChatsNavigatorProps = {
+  chats: ChatData[];
+  onSelectChat: (chat: ChatData) => void;
+};
+
+export default function ChatsNavigator({
+  chats,
+  onSelectChat,
+}: ChatsNavigatorProps) {
   return (
     <div className="flex flex-col">
       <div className="flex flex-col bg-skype-light-blue px-3 py-2 gap-2 w-80">
@@ -29,14 +40,28 @@ export default function ChatsNavigator() {
           Recent chats
         </h6>
 
-        <button className="p-2 rounded-lg hover:bg-skype-light-blue">
+        {chats.map((chat) => (
+          <button
+            key={chat.id}
+            onClick={() => onSelectChat(chat)}
+            className="p-2 rounded-lg hover:bg-skype-light-blue"
+          >
+            <ChatPreview
+              name={chat.contact.name}
+              previewText={chat.previewText}
+              timestamp={chat.lastMessageTimestamp}
+              profilePhotoUrl={chat.contact.profilePhotoUrl}
+            />
+          </button>
+        ))}
+        {/* <button className="p-2 rounded-lg hover:bg-skype-light-blue">
           <ChatPreview
             name="GamerDad788"
-            previewText="You there?? You there??"
+            previewText="Are you there?"
             timestamp="11:15 AM"
             profilePhotoUrl="https://randomuser.me/api/portraits/men/93.jpg"
           />
-        </button>
+        </button> */}
       </div>
     </div>
   );
