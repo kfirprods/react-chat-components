@@ -1,4 +1,4 @@
-"use client";
+// "use client";
 
 import { ChatMessageStatus } from "../../types";
 import MessageStatusIcon from "../MessageStatusIcon/MessageStatusIcon";

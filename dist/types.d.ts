@@ -84,6 +84,7 @@ type ChatProps = {
     chatTitle: string;
     messages: ChatMessage[];
     onSend: (message: ChatMessage) => void;
+    hideAddAttachmentsButton?: boolean;
     hideNavBarBackButton?: boolean;
     chatSubtitle?: string;
     profilePhotoUrl?: string;
@@ -97,4 +98,16 @@ type ChatHandle = {
 };
 declare const _default: react.ForwardRefExoticComponent<ChatProps & react.RefAttributes<ChatHandle>>;
 
-export { AttachmentViewer, _default as Chat, type ChatHandle, _default$2 as ChatInput, type ChatInputHandle, type ChatMessage, ChatMessageStatus, _default$1 as ChatMessagesList, type ChatMessagesListHandle, ChatNavBar, ChatPreview, type MessageAttachment };
+type MenuItemProps = {
+    text: string;
+    onClick: () => void;
+    leftSlot?: React.ReactNode;
+};
+declare const MenuItem: React.FC<MenuItemProps>;
+
+type AddAttachmentsMenuProps = {
+    onSelect: (files: File[]) => void;
+};
+declare const AddAttachmentsMenu: React.FC<AddAttachmentsMenuProps>;
+
+export { AddAttachmentsMenu, AttachmentViewer, _default as Chat, type ChatHandle, _default$2 as ChatInput, type ChatInputHandle, type ChatMessage, ChatMessageStatus, _default$1 as ChatMessagesList, type ChatMessagesListHandle, ChatNavBar, ChatPreview, MenuItem, type MessageAttachment };

@@ -9,11 +9,12 @@ export default function Home() {
 
       <div className="flex-1">
         <Chat
-          chatTitle="A"
-          chatSubtitle="B"
+          chatTitle="Wife"
+          chatSubtitle="Active now"
           messages={[]}
           onSend={() => {}}
           hideNavBarBackButton={true}
+          hideAddAttachmentsButton={true}
         />
       </div>
     </div>

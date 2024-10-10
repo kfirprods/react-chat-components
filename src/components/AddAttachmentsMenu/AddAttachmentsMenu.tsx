@@ -1,4 +1,4 @@
-"use client";
+// "use client";
 
 import { useFilePicker } from "use-file-picker";
 import MenuItem from "../MenuItem/MenuItem";

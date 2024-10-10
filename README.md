@@ -10,6 +10,10 @@ A set of mobile-friendly React components for chat apps, inspired by the interfa
 
 ### v1.0 ROADMAP
 
+#### CHAT
+
+- [ ] When rendering messages, support a slot to render custom content above and below the built-in bubble
+
 #### CHAT INPUT
 
 - [ ] Multiline
@@ -28,3 +32,10 @@ A set of mobile-friendly React components for chat apps, inspired by the interfa
 #### RECEIVING ATTACHMENTS
 
 - [ ] Render unsupported attachments in a generic fashion that'll allow them to be downloaded
+
+### v2.0 ROADMAP
+
+#### CHAT BUBBLES
+
+- [ ] Replies/quotes
+- [ ] Menus

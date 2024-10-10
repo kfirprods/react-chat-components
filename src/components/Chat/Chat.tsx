@@ -1,4 +1,4 @@
-"use client";
+// "use client";
 
 import { v4 as uuidv4 } from "uuid";
 import ChatNavBar from "../ChatNavBar/ChatNavBar";
@@ -26,6 +26,7 @@ export type ChatProps = {
   messages: ChatMessage[];
   onSend: (message: ChatMessage) => void;
 
+  hideAddAttachmentsButton?: boolean;
   hideNavBarBackButton?: boolean;
   chatSubtitle?: string;
   profilePhotoUrl?: string;
@@ -48,6 +49,7 @@ const Chat: React.ForwardRefRenderFunction<ChatHandle, ChatProps> = (
     hideChatInput,
     messages,
     hideNavBarBackButton,
+    hideAddAttachmentsButton,
     onSend,
     onClose,
   },
@@ -249,7 +251,7 @@ const Chat: React.ForwardRefRenderFunction<ChatHandle, ChatProps> = (
         <ChatInput
           ref={chatInputRef}
           onSend={handleSend}
-          leftSlot={addAttachmentButton}
+          leftSlot={!hideAddAttachmentsButton && addAttachmentButton}
           disabled={disableChatInput}
         />
       )}

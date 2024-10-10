@@ -7,6 +7,8 @@ import ChatMessagesList, {
 } from "./components/ChatMessagesList/ChatMessagesList";
 import AttachmentViewer from "./components/AttachmentViewer/AttachmentViewer";
 import Chat, { ChatHandle } from "./components/Chat/Chat";
+import MenuItem from "./components/MenuItem/MenuItem";
+import AddAttachmentsMenu from "./components/AddAttachmentsMenu/AddAttachmentsMenu";
 
 export {
   ChatPreview,
@@ -15,6 +17,8 @@ export {
   AttachmentViewer,
   ChatMessagesList,
   Chat,
+  MenuItem,
+  AddAttachmentsMenu,
 };
 export type { ChatInputHandle, ChatHandle, ChatMessagesListHandle };
 export * from "./types";
