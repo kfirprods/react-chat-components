@@ -72,3 +72,11 @@ body {
   height: 38px;
   width: 38px;
 }
+
+.chat-bubble.chat-bubble-left {
+  border-top-left-radius: 0;
+}
+
+.chat-bubble.chat-bubble-right {
+  border-top-right-radius: 0;
+}

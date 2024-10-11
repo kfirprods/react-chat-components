@@ -2,20 +2,66 @@
 
 import ChatsNavigator from "@/components/ChatsNavigator";
 import NoChatSelected from "@/components/NoChatSelected";
-import { ChatData } from "@/types";
-import { useState } from "react";
-import { Chat } from "react-chat-components";
+import {
+  RawChatData,
+  ChatViewModel,
+  convertToChatMessage,
+  timestampToRelativeTime,
+} from "@/types";
+import { useEffect, useState } from "react";
+import { Chat, ChatMessage } from "react-chat-components";
+
+const loggedInUserId = "1";
 
 export default function Home() {
-  const [activeChat, setActiveChat] = useState<ChatData | null>(null);
-  const chatList: ChatData[] = [];
+  const [activeChatId, setActiveChatId] = useState<string | null>(null);
+  const [chatList, setChatList] = useState<ChatViewModel[]>([]);
+
+  const activeChat = chatList.find((c) => c.id === activeChatId);
+
+  useEffect(() => {
+    fetch("/api/chats").then((res) => {
+      res.json().then((data: RawChatData[]) => {
+        const chatViewModels = data
+          .map((chatData) => ({
+            ...chatData,
+            lastMessageTimestamp: timestampToRelativeTime(
+              chatData.lastMessageTimestamp
+            ),
+            messages: chatData.messages.map((messageData) =>
+              convertToChatMessage(messageData, loggedInUserId)
+            ),
+          }))
+          .map((chatData) => chatData as ChatViewModel);
+
+        setChatList(chatViewModels);
+      });
+    });
+  }, []);
+
+  function handleSendMessage(message: ChatMessage) {
+    if (!activeChat) {
+      return;
+    }
+
+    message.status = undefined;
+
+    const newActiveChat: ChatViewModel = {
+      ...activeChat,
+      messages: [...(activeChat.messages as ChatViewModel[]), message],
+    };
+
+    setChatList((prev) =>
+      prev.map((c) => (c.id === activeChatId ? newActiveChat : c))
+    );
+  }
 
   return (
     <div className="h-full flex flex-row">
       <div className="flex-none">
         <ChatsNavigator
           chats={chatList}
-          onSelectChat={(c) => setActiveChat(c)}
+          onSelectChat={(c) => setActiveChatId(c.id)}
         />
       </div>
 
@@ -25,7 +71,10 @@ export default function Home() {
             chatTitle={activeChat.contact.name}
             chatSubtitle="Last seen 3 days ago"
             messages={activeChat.messages}
-            onSend={() => {}}
+            profilePhotoUrl={activeChat.contact.profilePhotoUrl}
+            onSend={(message) => {
+              handleSendMessage(message);
+            }}
             hideNavBarBackButton={true}
             hideAddAttachmentsButton={true}
           />

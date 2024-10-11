@@ -1,11 +1,11 @@
 "use client";
 
-import { ChatData } from "@/types";
+import { ChatViewModel } from "@/types";
 import { ChatPreview, ProfilePicture } from "react-chat-components";
 
 export type ChatsNavigatorProps = {
-  chats: ChatData[];
-  onSelectChat: (chat: ChatData) => void;
+  chats: ChatViewModel[];
+  onSelectChat: (chat: ChatViewModel) => void;
 };
 
 export default function ChatsNavigator({

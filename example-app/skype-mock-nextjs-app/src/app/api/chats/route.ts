@@ -5,5 +5,10 @@ export async function GET(request: Request): Promise<Response> {
   const userId = "1";
 
   const chats = await getUserChats(userId);
+  chats.sort(
+    (a, b) =>
+      new Date(b.lastMessageTimestamp).getTime() -
+      new Date(a.lastMessageTimestamp).getTime()
+  );
   return new Response(JSON.stringify(chats));
 }
