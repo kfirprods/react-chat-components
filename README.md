@@ -1,14 +1,21 @@
 # react-chat-components
 
-A set of mobile-friendly React components for chat apps, inspired by the interfaces of WhatsApp, iMessage, Facebook Messenger, Skype, etc.
+A set of highly-themeable React components for chat apps, inspired by the interfaces of WhatsApp, iMessage, Facebook Messenger, Skype, etc.
 
 ## Installation
 
 `npm i react-chat-components`
 
-## Docs
+## Docs and References
 
-The docs are WIP and will be published soon!
+### Storybook
+
+The Storybook docs are still a work in progress, but provide examples of all components:
+https://kfirprods.github.io/react-chat-components
+
+### Example app - "Zkype"
+
+Check out the `example-app` folder which implements "Zkype", a minimal NextJS mock-up of Skype's chat interface. It uses `react-chat-components` and demonstrates how the components can be themed by overriding CSS variables and some CSS classes.
 
 ## Roadmaps
 

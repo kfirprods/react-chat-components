@@ -11,7 +11,7 @@
   "dependencies": {
     "next": "14.2.15",
     "react": "^18",
-    "react-chat-components": "file:../..",
+    "react-chat-components": "^0.0.3",
     "react-dom": "^18"
   },
   "devDependencies": {
