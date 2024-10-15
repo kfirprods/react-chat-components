@@ -6,6 +6,10 @@ A set of mobile-friendly React components for chat apps, inspired by the interfa
 
 `npm i react-chat-components`
 
+## Docs
+
+The docs are WIP and will be published soon!
+
 ## Roadmaps
 
 ### v1.0 ROADMAP

@@ -8,6 +8,7 @@ import typescript from "@rollup/plugin-typescript";
 import dts from "rollup-plugin-dts";
 import terser from "@rollup/plugin-terser";
 import peerDepsExternal from "rollup-plugin-peer-deps-external";
+import deleteFolder from "rollup-plugin-delete";
 
 const packageJson = require("./package.json");
 const tailwindConfig = require("./tailwind.config.js");
@@ -19,15 +20,16 @@ const config = [
       {
         file: packageJson.main,
         format: "cjs",
-        sourcemap: true,
+        sourcemap: false,
       },
       {
         file: packageJson.module,
         format: "esm",
-        sourcemap: true,
+        sourcemap: false,
       },
     ],
     plugins: [
+      deleteFolder({ targets: "dist/*" }),
       peerDepsExternal(),
       resolve(),
       commonjs(),

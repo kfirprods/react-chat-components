@@ -1,8 +1,12 @@
 {
   "name": "react-chat-components",
-  "version": "0.1.0",
+  "version": "0.0.3",
   "private": false,
   "author": "Kfir Eichenblat",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kfirprods/react-chat-components"
+  },
   "license": "MIT",
   "description": "A library of React components for building chat interfaces.",
   "main": "dist/cjs/index.js",
@@ -55,6 +59,7 @@
     "postcss": "^8.4.47",
     "prop-types": "^15.8.1",
     "rollup": "^4.24.0",
+    "rollup-plugin-delete": "^2.1.0",
     "rollup-plugin-dts": "^6.1.1",
     "rollup-plugin-peer-deps-external": "^2.2.4",
     "rollup-plugin-postcss": "^4.0.2",
