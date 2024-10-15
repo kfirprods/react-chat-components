@@ -87,6 +87,8 @@ const ChatMessagesList: React.ForwardRefRenderFunction<
             status={message.status}
             align={message.alignment}
             isLastInGroupedMessages={message.isLastInGroup}
+            aboveBubbleSlot={message.slotAboveBubble}
+            belowBubbleSlot={message.slotBelowBubble}
           >
             <MessageContent
               message={message}

@@ -9,6 +9,7 @@ import AttachmentViewer from "./components/AttachmentViewer/AttachmentViewer";
 import ProfilePicture from "./components/ProfilePicture/ProfilePicture";
 import MenuItem from "./components/MenuItem/MenuItem";
 import AddAttachmentsMenu from "./components/AddAttachmentsMenu/AddAttachmentsMenu";
+import ChatBubble from "./components/ChatBubble/ChatBubble";
 import Chat, { ChatHandle } from "./components/Chat/Chat";
 
 export {
@@ -21,6 +22,7 @@ export {
   MenuItem,
   AddAttachmentsMenu,
   ProfilePicture,
+  ChatBubble,
 };
 export type { ChatInputHandle, ChatHandle, ChatMessagesListHandle };
 export * from "./types";

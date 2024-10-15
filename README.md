@@ -12,13 +12,13 @@ A set of mobile-friendly React components for chat apps, inspired by the interfa
 
 #### CHAT
 
-- [ ] When rendering messages, support a slot to render custom content above and below the built-in bubble
+- [x] When rendering messages, support a slot to render custom content above and below the built-in bubble
 
 #### CHAT INPUT
 
 - [ ] Multiline
 - [ ] Slots inside the input area (commonly used for stickers/emojis)
-- [ ] Highlight URL
+- [ ] Highlight URLs
 
 #### CHAT BUBBLES
 
@@ -38,4 +38,4 @@ A set of mobile-friendly React components for chat apps, inspired by the interfa
 #### CHAT BUBBLES
 
 - [ ] Replies/quotes
-- [ ] Menus
+- [ ] Menus (e.g. reply, copy, forward)

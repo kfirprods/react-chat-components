@@ -1,4 +1,4 @@
-import { RawChatData, ContactData } from "@/types";
+import { RawChatData, ContactData, RawMessageStatus } from "@/types";
 
 export const CONTACTS: ContactData[] = [
   {
@@ -43,6 +43,7 @@ export const CHATS: RawChatData[] = [
         textualContent: "Who are you?",
         timestamp: "2024-10-09T12:00:00Z",
         senderId: LOGGED_IN_USER.id,
+        status: RawMessageStatus.SEEN,
       },
     ],
     lastMessageTimestamp: "2024-10-09T12:00:00Z",

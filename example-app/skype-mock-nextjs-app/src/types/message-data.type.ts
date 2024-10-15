@@ -1,22 +1,12 @@
-import { ChatMessage } from "react-chat-components";
+import { RawMessageStatus } from "./raw-message-status.enum";
 
 export type MessageData = {
   id: string;
   timestamp: string;
   textualContent?: string;
   senderId: string;
+  status: RawMessageStatus;
 };
-
-export function convertToChatMessage(
-  messageData: MessageData,
-  forUserId: string
-): ChatMessage {
-  return {
-    ...messageData,
-    timestamp: undefined,
-    alignment: messageData.senderId === forUserId ? "right" : "left",
-  };
-}
 
 export function timestampToRelativeTime(timestamp: string): string {
   const date = new Date(timestamp);

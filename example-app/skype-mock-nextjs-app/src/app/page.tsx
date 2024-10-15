@@ -2,14 +2,10 @@
 
 import ChatsNavigator from "@/components/ChatsNavigator";
 import NoChatSelected from "@/components/NoChatSelected";
-import {
-  RawChatData,
-  ChatViewModel,
-  convertToChatMessage,
-  timestampToRelativeTime,
-} from "@/types";
+import { RawChatData, ChatViewModel, timestampToRelativeTime } from "@/types";
 import { useEffect, useState } from "react";
 import { Chat, ChatMessage } from "react-chat-components";
+import { convertToChatMessage } from "./utils/raw-data-to-rcc.converter";
 
 const loggedInUserId = "1";
 
@@ -28,8 +24,9 @@ export default function Home() {
             lastMessageTimestamp: timestampToRelativeTime(
               chatData.lastMessageTimestamp
             ),
+            // TODO: make this conversion reactive
             messages: chatData.messages.map((messageData) =>
-              convertToChatMessage(messageData, loggedInUserId)
+              convertToChatMessage(messageData, loggedInUserId, chatData)
             ),
           }))
           .map((chatData) => chatData as ChatViewModel);

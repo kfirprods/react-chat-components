@@ -7,9 +7,15 @@ export type ChatMessage = {
   status?: ChatMessageStatus;
   timestamp?: string;
   alignment?: "left" | "right" | "stretch";
-  customRender?: React.ReactNode;
   isLastInGroup?: boolean;
 
   textualContent?: string;
   attachments?: MessageAttachment[];
+
+  // render something *instead* of a chat bubble
+  customRender?: React.ReactNode;
+
+  // slots for content above and below a chat bubble
+  slotAboveBubble?: React.ReactNode;
+  slotBelowBubble?: React.ReactNode;
 };
