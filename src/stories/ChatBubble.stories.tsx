@@ -15,7 +15,9 @@ const meta = {
 
     docs: {
       description: {
-        component: `A basic text input component paired with a "Send" button. Additional functionality can be injected via left and right slots.`,
+        component: `A rather generic chat bubble that lets you render anything via its children prop. 
+\n\n
+It is recommended to use the MessageContent component to render message contents (unless you wish to render something that's not supported by MessageContent, such as videos).`,
       },
     },
   },
@@ -66,6 +68,15 @@ export const AlignRight: Story = {
   args: {
     children: "The bubble aligns itself to flex-end",
     align: "right",
+  },
+
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "Aligns the bubble to flex-end and applies the `chat-bubble-right` CSS class. You can easily change the background color by overriding the `--chat-bubble-right-bg-color` CSS variable.",
+      },
+    },
   },
 };
 

@@ -7,15 +7,19 @@ const meta = {
   title: "Lower Order Components/AttachmentViewer",
   component: AttachmentViewer,
   parameters: {
-    // Optional parameter to center the component in the Canvas. More info: https://storybook.js.org/docs/configure/story-layout
-    // layout: "fullscreen",
     backgrounds: {
       values: [{ name: "dark", value: "#333" }],
     },
 
     docs: {
       description: {
-        component: `A viewer to display when users click on an attachment in a chat message.`,
+        component: `A viewer that can be displayed when users click an attachment in a chat message.`,
+      },
+      story: {
+        height: "400px",
+      },
+      canvas: {
+        sourceState: "shown",
       },
     },
   },
@@ -70,6 +74,14 @@ export const WithMessageContext: Story = {
     },
     onClose: () => {
       alert("Attachment viewer closed");
+    },
+  },
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "Provide a `ChatMessage` object for context. Affects the alignment of the opening animation, timestamp and description.",
+      },
     },
   },
 };

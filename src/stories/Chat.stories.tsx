@@ -13,6 +13,15 @@ const meta = {
     backgrounds: {
       values: [{ name: "dark", value: "#333" }],
     },
+    docs: {
+      description: {
+        component: `
+A full chat component consisting of: \`ChatNavBar\`, \`ChatMessagesList\` and \`ChatInput\`. It mostly forwards props to those 3, but also adds some functionality such as auto-scroll and basic support for attachments.
+          \n\n
+If this component doesn't fit your needs, you can use its implementation as a reference to building a custom Chat component with our lower order components.
+          `,
+      },
+    },
   },
   // This component will have an automatically generated Autodocs entry: https://storybook.js.org/docs/writing-docs/autodocs
   tags: ["autodocs"],

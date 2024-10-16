@@ -11,6 +11,16 @@ const meta = {
     layout: "padded",
     backgrounds: {
       values: [{ name: "dark", value: "#333" }],
+      default: "dark",
+    },
+    docs: {
+      description: {
+        component: `
+A small preview of a chat, meant to display a contact's photo and name + a preview of the last message.
+\n\n
+Check out the \`EXAMPLES\` section of the docs to see how it comes together.
+        `,
+      },
     },
   },
   // This component will have an automatically generated Autodocs entry: https://storybook.js.org/docs/writing-docs/autodocs
