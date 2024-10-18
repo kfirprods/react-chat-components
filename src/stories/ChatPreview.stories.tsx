@@ -61,6 +61,15 @@ export const LongTexts: Story = {
     status: ChatMessageStatus.RECEIVED,
     timestamp: "Yesterday",
   },
+
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "Both the title and message preview have the text-ellipsis effect set to them, such that the title is limited to <b>1</b> line and the preview is clamped after <b>2</b> lines.",
+      },
+    },
+  },
 };
 
 export const ProfilePicture: Story = {
@@ -73,6 +82,15 @@ export const ProfilePicture: Story = {
 };
 
 export const CustomSlotBelowTimestamp: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'Use the `slotBelowTimestamp` prop to render any custom React node right below the timestamp, as demonstrated below for "unread messages" and "muted chat" indicators.',
+      },
+    },
+  },
+
   args: {
     name: "Boss",
     previewText: "Why won't you answer?",

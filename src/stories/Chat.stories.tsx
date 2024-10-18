@@ -16,7 +16,7 @@ const meta = {
     docs: {
       description: {
         component: `
-A full chat component consisting of: \`ChatNavBar\`, \`ChatMessagesList\` and \`ChatInput\`. It mostly forwards props to those 3, but also adds some functionality such as auto-scroll and basic support for attachments.
+A full chat component consisting of: \`ChatNavBar\`, \`ChatMessagesList\` and \`ChatInput\`. It mostly forwards props to those 3 and invokes the callbacks you provide, but also adds some functionality such as auto-scroll and basic support for attachments.
           \n\n
 If this component doesn't fit your needs, you can use its implementation as a reference to building a custom Chat component with our lower order components.
           `,
@@ -134,6 +134,18 @@ export const Basic: Story = {
 };
 
 export const NoInput: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story: `
+Use the \`hideChatInput\` boolean prop to hide the chat input.
+\n
+You can then render a custom input field, or a message to explain why the input is hidden.
+`,
+      },
+    },
+  },
+
   render: (args) => {
     return (
       <div className="h-full flex flex-col" style={{ background: "#1F1F1F" }}>
