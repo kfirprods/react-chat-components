@@ -4,7 +4,14 @@ A set of highly-themeable React components for chat apps, inspired by the interf
 
 ## Installation
 
+First, get the package from NPM:
 `npm i react-chat-components`
+
+Then, import the styles, e.g. in your main `.css` file:
+
+```css
+@import "react-chat-components/dist/esm/index.css";
+```
 
 ## Docs and References
 
