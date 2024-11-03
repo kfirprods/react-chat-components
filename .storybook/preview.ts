@@ -12,8 +12,8 @@ const preview: Preview = {
     options: {
       storySort: {
         order: [
-          "Higher Order Components",
-          "Lower Order Components",
+          "Higher Level Components",
+          "Lower Level Components",
           ["ChatInput", "ChatBubble", "ChatNavBar"],
         ],
       },

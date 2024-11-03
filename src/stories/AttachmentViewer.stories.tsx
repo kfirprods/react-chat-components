@@ -4,7 +4,7 @@ import { AttachmentViewer } from "..";
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
 const meta = {
-  title: "Lower Order Components/AttachmentViewer",
+  title: "Lower Level Components/AttachmentViewer",
   component: AttachmentViewer,
   parameters: {
     backgrounds: {

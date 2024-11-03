@@ -5,7 +5,7 @@ import { useCallback, useState } from "react";
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
 const meta = {
-  title: "Higher Order Components/Chat",
+  title: "Higher Level Components/Chat",
   component: Chat,
   parameters: {
     // Optional parameter to center the component in the Canvas. More info: https://storybook.js.org/docs/configure/story-layout
@@ -18,7 +18,7 @@ const meta = {
         component: `
 A full chat component consisting of: \`ChatNavBar\`, \`ChatMessagesList\` and \`ChatInput\`. It mostly forwards props to those 3 and invokes the callbacks you provide, but also adds some functionality such as auto-scroll and basic support for attachments.
           \n\n
-If this component doesn't fit your needs, you can use its implementation as a reference to building a custom Chat component with our lower order components.
+If this component doesn't fit your needs, you can use its implementation as a reference to building a custom Chat component with our lower level components.
           `,
       },
     },
